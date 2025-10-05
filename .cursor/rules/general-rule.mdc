@@ -1,0 +1,339 @@
+---
+alwaysApply: true
+---
+# Reglas para Agentes de IA - Proyecto Sistema de Enfriamiento GPU
+
+## PRINCIPIOS FUNDAMENTALES
+
+### 1. NO ASUMIR - SIEMPRE PREGUNTAR
+- NUNCA ejecutar código sin confirmación explícita del usuario
+- NUNCA crear archivos nuevos sin preguntar primero
+- NUNCA modificar archivos existentes sin permiso
+- SIEMPRE aclarar dudas antes de proceder
+- SIEMPRE completar vacíos de información preguntando
+
+### 2. TRABAJAR UNA COSA A LA VEZ
+- Completar TOTALMENTE una tarea antes de pasar a la siguiente
+- NO adelantarse a lo que el usuario va a necesitar
+- NO crear código "por si acaso"
+- Enfocarse en lo específicamente solicitado
+- Confirmar que la tarea actual está completa antes de continuar
+
+### 3. MANTENER CONTEXTO CON LOGS
+- SIEMPRE actualizar `WORKLOG.md` después de cada tarea completada
+- Incluir: fecha, hora, tarea, archivos modificados, resultado
+- Mantener un registro claro de decisiones tomadas
+- Documentar problemas encontrados y sus soluciones
+
+### 4. NO REESCRIBIR DOCUMENTOS COMPLETOS
+- Si un documento excede los tokens disponibles, NO reescribirlo
+- Solo CONTINUAR el desarrollo desde donde quedó
+- Usar comentarios `# ... [continuación desde línea X]` cuando sea necesario
+- Mantener archivos modulares para evitar este problema
+
+## REGLAS DE DESARROLLO
+
+### Estructura de Código
+```python
+# SIEMPRE usar esta estructura para funciones:
+def nombre_funcion(parametros):
+    """
+    Descripción breve de qué hace la función.
+    
+    Args:
+        param1 (tipo): Descripción
+        param2 (tipo): Descripción
+    
+    Returns:
+        tipo: Descripción del retorno
+    
+    Raises:
+        TipoError: Cuándo se lanza
+    """
+    # Validaciones al inicio
+    assert condiciones, "Mensaje de error claro"
+    
+    # Código principal
+    resultado = ...
+    
+    # Validaciones de salida (si aplica)
+    assert validaciones_resultado, "Mensaje"
+    
+    return resultado
+```
+
+### Orden de Implementación
+1. **Parametros**: Primero la clase Parametros completa
+2. **Mallas**: Generación de todas las mallas
+3. **Solvers individuales**: Uno a la vez (fluido → placa → aletas)
+4. **Acoplamiento**: Solo después de que los solvers funcionen
+5. **Bucle temporal**: Al final, integrando todo
+6. **Testing**: A medida que se desarrolla cada módulo
+
+### Validaciones Obligatorias
+```python
+# SIEMPRE incluir al inicio de cada función crítica:
+assert not np.isnan(input_array).any(), "Input contiene NaN"
+assert not np.isinf(input_array).any(), "Input contiene Inf"
+
+# SIEMPRE incluir al final:
+assert not np.isnan(output_array).any(), "Output generó NaN"
+assert not np.isinf(output_array).any(), "Output generó Inf"
+```
+
+## REGLAS DE DOCUMENTACIÓN
+
+### Docstrings
+- SIEMPRE usar formato NumPy/Google
+- SIEMPRE incluir tipos de parámetros
+- SIEMPRE documentar excepciones posibles
+
+### Comentarios
+- Explicar el "por qué", no el "qué"
+- Incluir referencias a ecuaciones del documento cuando aplique
+- Marcar TODOs claramente: `# TODO: Descripción específica`
+
+### Nombres de Variables
+```python
+# USAR nombres descriptivos:
+T_placa          # ✅ Bueno
+temperatura_nodo # ✅ Bueno
+temp             # ❌ Ambiguo
+t                # ❌ Muy corto (solo para índices)
+
+# Seguir convención del documento:
+T_f      # Temperatura fluido
+T_s      # Temperatura superficie
+alpha    # Difusividad térmica
+Fo_x     # Número de Fourier en x
+```
+
+## REGLAS DE TESTING
+
+### Antes de Decir "Está Listo"
+```python
+# EJECUTAR estos checks:
+1. ¿El código ejecuta sin errores?
+2. ¿Cumple CFL < 1 y Fourier < 0.5?
+3. ¿Las temperaturas están en rango físico (200K - 400K)?
+4. ¿No hay NaN ni Inf?
+5. ¿La función hace EXACTAMENTE lo solicitado?
+```
+
+### Testing Incremental
+- Probar cada función inmediatamente después de escribirla
+- NO esperar a tener todo el código para testear
+- Crear casos de prueba simples primero
+
+## REGLAS DE COMUNICACIÓN
+
+### Al Presentar Soluciones
+1. **Explicar brevemente** qué hace el código
+2. **Mostrar el código** completo
+3. **Indicar dónde guardarlo** (nombre de archivo)
+4. **Listar dependencias** necesarias
+5. **Sugerir cómo testearlo**
+6. **ESPERAR confirmación** antes de continuar
+
+### Al Encontrar Problemas
+1. **Describir el problema** claramente
+2. **Mostrar el error** (mensaje completo)
+3. **Proponer 2-3 soluciones** posibles
+4. **PREGUNTAR** cuál prefiere el usuario
+5. **NO implementar** sin confirmación
+
+### Al Necesitar Información
+```
+❌ NUNCA: "Asumiré que X es Y"
+✅ SIEMPRE: "Necesito saber X para continuar. ¿Debería ser Y o Z?"
+```
+
+## FORMATO DE WORKLOG
+
+### Entrada Estándar en WORKLOG.md
+```markdown
+## [FECHA] - [HORA] - [TAREA]
+
+**Estado:** ✅ Completado / ⚠️ En progreso / ❌ Bloqueado
+
+**Archivos modificados:**
+- `ruta/archivo1.py` - Descripción del cambio
+- `ruta/archivo2.py` - Descripción del cambio
+
+**Descripción:**
+[Qué se hizo exactamente]
+
+**Decisiones tomadas:**
+- Decisión 1: Razón
+- Decisión 2: Razón
+
+**Problemas encontrados:**
+- Problema 1: Solución aplicada
+- Problema 2: Solución aplicada
+
+**Pendientes:**
+- [ ] Pendiente 1
+- [ ] Pendiente 2
+
+**Siguiente paso sugerido:**
+[Qué debería hacerse a continuación]
+
+---
+```
+
+## REGLAS DE OPTIMIZACIÓN
+
+### Cuándo Optimizar
+- ❌ NO optimizar prematuramente
+- ✅ Primero hacer que funcione correctamente
+- ✅ Luego hacer que sea claro
+- ✅ Solo al final, hacer que sea rápido
+
+### Prioridades
+1. **Correcto** > Rápido
+2. **Claro** > Elegante  
+3. **Simple** > Complejo
+4. **Probado** > Asumido
+
+## MANEJO DE ERRORES
+
+### Estrategia de Debugging
+```python
+# SIEMPRE incluir debugging prints durante desarrollo:
+if DEBUG:
+    print(f"Variable X = {X}")
+    print(f"Rango: min={X.min()}, max={X.max()}")
+    print(f"Contiene NaN: {np.isnan(X).any()}")
+
+# Usar asserts liberalmente:
+assert condicion, f"Error específico: {info_relevante}"
+```
+
+### Cuando Algo Falla
+1. **Leer el error completo** (no solo la última línea)
+2. **Identificar** exactamente dónde ocurre
+3. **Reproducir** con caso mínimo
+4. **Aislar** la causa
+5. **Proponer solución** específica
+6. **Esperar aprobación** antes de implementar
+
+## ARQUITECTURA DEL PROYECTO
+
+### Separación de Responsabilidades
+```
+src/
+├── parametros.py      # SOLO parámetros y constantes
+├── mallas.py          # SOLO generación de mallas
+├── fluido.py          # SOLO solver del fluido
+├── placa.py           # SOLO solver de la placa
+├── aletas.py          # SOLO solver de aletas
+├── acoplamiento.py    # SOLO interfaces entre dominios
+├── solucionador.py    # SOLO bucle temporal
+└── visualizacion.py   # SOLO funciones de gráficos
+```
+
+### Cada Archivo Debe:
+- Tener UNA responsabilidad clara
+- Ser independiente (minimal coupling)
+- Ser testeable por separado
+- Tener imports mínimos necesarios
+
+## CHECKPOINTS OBLIGATORIOS
+
+### Antes de Cada Commit Conceptual
+- [ ] ¿El código ejecuta sin errores?
+- [ ] ¿Está documentado adecuadamente?
+- [ ] ¿Tiene validaciones de entrada/salida?
+- [ ] ¿El WORKLOG está actualizado?
+- [ ] ¿Se testeó con caso simple?
+- [ ] ¿El usuario confirmó que está bien?
+
+## PROHIBICIONES ABSOLUTAS
+
+### ❌ NUNCA Hacer:
+1. Ejecutar código que modifique archivos sin confirmación
+2. Asumir valores de parámetros no especificados
+3. "Mejorar" código sin que se solicite
+4. Agregar funcionalidades "útiles" no pedidas
+5. Copiar código de internet sin entenderlo
+6. Usar librerías no listadas en `requirements.txt`
+7. Hardcodear valores que deberían ser parámetros
+8. Ignorar warnings o errores "pequeños"
+
+## PALABRAS CLAVE DE ACCIÓN
+
+### Cuando el Usuario Dice:
+- **"Implementa"** → Escribir código completo y funcional
+- **"Revisa"** → Analizar y reportar problemas sin modificar
+- **"Corrige"** → Arreglar error específico mencionado
+- **"Optimiza"** → Mejorar performance manteniendo funcionalidad
+- **"Explica"** → Describir sin cambiar nada
+- **"Sugiere"** → Proponer opciones sin implementar
+
+### Respuesta Estándar
+```
+Entendido. Voy a [acción específica].
+
+Antes de proceder:
+1. [Pregunta de clarificación 1]
+2. [Pregunta de clarificación 2]
+
+¿Procedo?
+```
+
+## RECURSOS DISPONIBLES
+
+### Archivos de Contexto (carpeta contexto/)
+1. `01_contexto_proyecto.md` - Descripción del problema
+2. `02_parametros_sistema.md` - Todos los parámetros
+3. `03_ecuaciones_gobernantes.md` - Ecuaciones diferenciales
+4. `04_condiciones_frontera.md` - BCs e interfaces
+5. `05_discretizacion_numerica.md` - Esquemas numéricos
+6. `06_herramientas_desarrollo.md` - Setup técnico
+
+### Consultar SIEMPRE:
+- Ecuaciones → `03_ecuaciones_gobernantes.md`
+- Parámetros → `02_parametros_sistema.md`
+- Condiciones de frontera → `04_condiciones_frontera.md`
+- Discretización → `05_discretizacion_numerica.md`
+
+## TEMPLATE DE RESPUESTA
+
+```markdown
+# [Título de la Tarea]
+
+## Análisis
+[Qué entiendo que hay que hacer]
+
+## Preguntas de Clarificación
+1. [Pregunta 1]
+2. [Pregunta 2]
+
+## Propuesta
+[Descripción de cómo lo haré]
+
+## Código
+[Mostrar código cuando aplique]
+
+## Testing Sugerido
+[Cómo verificar que funciona]
+
+## Siguiente Paso
+[Qué vendría después de esto]
+
+---
+¿Procedo con esta implementación?
+```
+
+## RESUMEN DE ORO
+
+### Las 5 Reglas de Oro
+1. **PREGUNTAR** antes de actuar
+2. **UNA TAREA** a la vez
+3. **ACTUALIZAR** el WORKLOG
+4. **VALIDAR** entrada y salida
+5. **ESPERAR** confirmación
+
+---
+
+**Estas reglas son OBLIGATORIAS y se aplican a TODAS las interacciones.**

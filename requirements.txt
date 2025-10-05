@@ -1,0 +1,19 @@
+# Dependencias del Proyecto - Sistema de Enfriamiento GPU
+# Proyecto: Simulación Numérica de Transferencia de Calor
+# Estudiante: Adrián Vargas Tijerino (C18332)
+# Curso: IQ-0331 Fenómenos de Transferencia
+
+# Librerías Núcleo
+numpy>=1.24.0          # Operaciones numéricas y manejo de arrays
+scipy>=1.10.0          # Algoritmos científicos avanzados
+matplotlib>=3.7.0      # Visualización de resultados
+pandas>=2.0.0          # Manejo de datos tabulares
+
+# Librerías Adicionales
+numba>=0.57.0          # Aceleración JIT de bucles
+seaborn>=0.12.0        # Visualizaciones estadísticas
+tqdm>=4.65.0           # Barras de progreso
+
+# Instalación:
+# pip install -r requirements.txt
+
