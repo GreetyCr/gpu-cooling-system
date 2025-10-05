@@ -19,6 +19,88 @@
 
 ## Registro de Trabajo
 
+## [2025-10-05] - [15:00] - Corrección de Errores en Visualización
+
+**Estado:** ✅ Completado
+
+**Archivos modificados:**
+- `src/solucionador.py` - Agregar clave 'tiempo' al balance energético
+- `src/visualizacion.py` - Múltiples correcciones para manejo robusto de datos
+
+**Descripción detallada:**
+Se corrigieron dos errores críticos en la generación de visualizaciones que impedían crear los gráficos de campos 2D y balance energético:
+
+**Error 1: Balance Energético (Punto 4)**
+- **Problema:** KeyError: 'tiempo' al intentar graficar el balance energético
+- **Causa raíz:** La función `calcular_balance_energetico()` no incluía la clave 'tiempo' en el diccionario retornado
+- **Solución:** Modificar `solucionador.py` línea ~537 para agregar `balance['tiempo'] = t` antes de guardar
+- **Mejora adicional:** Agregar manejo de compatibilidad en `visualizacion.py` para resultados antiguos sin 'tiempo'
+
+**Error 2: Campos 2D (Punto 3)**
+- **Problema:** TypeError: "Length of x (20) must match number of columns in z (10)"
+- **Causa raíz 1:** Arrays guardados con dtype=object en lugar de dtype=float
+- **Causa raíz 2:** Dimensiones de arrays de aletas transpuestas incorrectamente
+- **Solución 1:** Convertir explícitamente arrays dtype=object a float arrays numéricos (línea ~340)
+- **Solución 2:** Detectar y transponer automáticamente T_aletas si dimensiones no coinciden (línea ~420)
+
+**Correcciones implementadas:**
+1. **solucionador.py línea 537:**
+   ```python
+   balance['tiempo'] = t
+   metricas['balance'].append(balance)
+   ```
+
+2. **visualizacion.py línea 438:**
+   - Manejo de balances con y sin 'tiempo' (compatibilidad retroactiva)
+   - Si no hay 'tiempo', estimar desde `resultados['tiempo']` con stride
+
+3. **visualizacion.py línea 340:**
+   - Detectar arrays dtype=object
+   - Convertir a float arrays usando list comprehension nested
+   - Aplicar tanto a T_placa como a T_aletas
+
+4. **visualizacion.py línea 420:**
+   - Verificar dimensiones de T_aletas
+   - Transponer automáticamente si shape es (N_theta, N_r) en lugar de (N_r, N_theta)
+
+5. **visualizacion.py línea 1126:**
+   - Agregar traceback completo en excepciones para mejor debugging
+
+**Resultado:**
+- ✅ Balance energético se genera correctamente
+- ✅ Campos 2D se generan correctamente
+- ✅ Ahora se generan **6 figuras** exitosamente (antes solo 5)
+- ✅ Nuevas figuras agregadas al repositorio:
+  - `balance_energetico_Al.png`
+  - `campos_2d_Al_t60.00s.png`
+  - `distribucion_espacial_Al_t60.00s.png` (actualizado)
+
+**Testing realizado:**
+- [x] Ejecutar `main.py --solo-visualizacion --sin-validacion`
+- [x] Verificar generación de las 6 figuras
+- [x] Confirmar que no hay errores en el output
+- [x] Revisar figuras generadas visualmente
+
+**Commits realizados:**
+- `27972f9` - fix: Corregir errores en visualización de campos 2D y balance energético
+- `196f112` - docs: Agregar nuevas figuras generadas con correcciones
+
+**Lecciones aprendidas:**
+- Los arrays guardados con `np.savez` pueden tener dtype=object si contienen objetos Python
+- Usar `allow_pickle=True` puede causar problemas de tipo al cargar
+- Siempre verificar dimensiones antes de pasar datos a matplotlib
+- En coordenadas polares, contourf espera shape (N_r, N_theta), no (N_theta, N_r)
+
+**Siguiente paso sugerido:**
+El sistema de visualización está completamente funcional. Próximos pasos:
+1. Regenerar resultados con código corregido (opcional)
+2. Ejecutar simulación para acero inoxidable
+3. Comparar resultados entre materiales
+
+**Tiempo invertido:** 1.0 horas
+
+---
+
 ## [2025-10-05] - [14:15] - Sincronización Completa del Repositorio GitHub
 
 **Estado:** ✅ Completado
