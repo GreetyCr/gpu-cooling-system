@@ -1262,6 +1262,68 @@ Continuar con la implementación del bucle temporal y criterio de convergencia a
 
 ---
 
+## [2025-10-05] - [13:50] - Documentación de Uso en Jupyter Notebook y Spyder
+
+**Estado:** ✅ Completado
+
+**Archivos modificados:**
+- `README.md` - Agregada sección completa de uso en Jupyter Notebook y Spyder
+
+**Descripción detallada:**
+Se agregó una sección extensa al README con instrucciones detalladas sobre cómo utilizar el proyecto en dos entornos de desarrollo científico populares: Jupyter Notebook y Spyder. La documentación incluye ejemplos de código, configuración y mejores prácticas para cada herramienta.
+
+**Contenido agregado:**
+1. **Jupyter Notebook:**
+   - Instalación (notebook y lab)
+   - Inicialización del proyecto
+   - 5 celdas de ejemplo completas (imports, parámetros, mallas, visualización, simulación)
+   - Tips y trucos (autocomplete, ayuda rápida, guardar figuras, etc.)
+
+2. **Spyder:**
+   - Instalación (pip y conda)
+   - Configuración del proyecto (directorio de trabajo, Python path)
+   - Script de prueba completo (`test_simulacion.py`)
+   - Uso del explorador de variables
+   - Uso de la consola IPython
+   - Tips avanzados (ejecución por líneas, celdas, debugging)
+
+3. **Tabla comparativa:** Jupyter vs Spyder para ayudar a elegir la herramienta adecuada
+
+4. **Recursos adicionales:** Enlaces a documentación oficial y atajos de teclado
+
+**Decisiones técnicas tomadas:**
+- **Ejemplos prácticos:** Se incluyeron ejemplos de código ejecutables directamente
+- **Formato educativo:** Pensado para estudiantes que pueden no estar familiarizados con estas herramientas
+- **Tabla comparativa:** Para ayudar a elegir la herramienta según el caso de uso
+- **Tips específicos:** Para mejorar la productividad en cada entorno
+
+**Estadísticas:**
+- +263 líneas agregadas al README
+- Sección de ~280 líneas total
+- Incluye 8 bloques de código ejemplo
+- 1 tabla comparativa
+- Enlaces a recursos externos
+
+**Verificaciones de calidad:**
+- [x] Ejemplos de código verificados
+- [x] Sintaxis de markdown correcta
+- [x] Enlaces funcionan correctamente
+- [x] Formato consistente con el resto del README
+- [x] Commit y push exitosos
+
+**Beneficios para el usuario:**
+- Facilita el uso del proyecto en entornos académicos
+- Reduce curva de aprendizaje para nuevos usuarios
+- Proporciona ejemplos copy-paste listos para usar
+- Documenta mejores prácticas específicas para análisis científico
+
+**Siguiente paso sugerido:**
+El proyecto ahora tiene documentación completa de instalación y uso. Siguiente: implementar el bucle temporal completo para poder ejecutar las simulaciones descritas en los ejemplos.
+
+**Tiempo invertido:** 0.3 horas
+
+---
+
 ## Próximas Sesiones
 
 ### Sesión 1: Parámetros y Mallas
