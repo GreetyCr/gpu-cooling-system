@@ -1,0 +1,325 @@
+================================================================================
+COMANDOS PARA STREAMLIT - INTERFAZ WEB
+Sistema de Enfriamiento GPU
+================================================================================
+
+UBICACIÓN: /Users/randallbonilla/Desktop/python-adrian
+
+================================================================================
+1. INICIAR LA INTERFAZ WEB
+================================================================================
+
+Comando principal:
+------------------
+cd /Users/randallbonilla/Desktop/python-adrian
+python3 -m streamlit run interfaz_web.py
+
+La interfaz abrirá automáticamente en tu navegador en:
+http://localhost:8501
+
+Si no abre automáticamente, copia y pega esa URL en tu navegador.
+
+
+Ejecutar en segundo plano (no bloquea terminal):
+-------------------------------------------------
+cd /Users/randallbonilla/Desktop/python-adrian
+python3 -m streamlit run interfaz_web.py > streamlit.log 2>&1 &
+
+Ventaja: Puedes seguir usando la terminal mientras corre.
+
+
+================================================================================
+2. DETENER LA INTERFAZ WEB
+================================================================================
+
+Si ejecutaste en primer plano:
+-------------------------------
+Presiona: Ctrl + C
+
+Si ejecutaste en segundo plano:
+--------------------------------
+pkill -f "streamlit"
+
+Verificar que se detuvo:
+------------------------
+ps aux | grep streamlit | grep -v grep
+
+(Si no muestra nada, significa que se detuvo correctamente)
+
+
+================================================================================
+3. VER LOGS EN TIEMPO REAL
+================================================================================
+
+Si ejecutaste con redirección a log:
+-------------------------------------
+tail -f /Users/randallbonilla/Desktop/python-adrian/streamlit.log
+
+Para salir de tail: Ctrl + C
+
+
+Ver todo el log:
+----------------
+cat /Users/randallbonilla/Desktop/python-adrian/streamlit.log
+
+
+Ver últimas 50 líneas:
+----------------------
+tail -50 /Users/randallbonilla/Desktop/python-adrian/streamlit.log
+
+
+================================================================================
+4. REINICIAR LA INTERFAZ
+================================================================================
+
+Detener y reiniciar (un solo comando):
+---------------------------------------
+pkill -f "streamlit" && sleep 1 && cd /Users/randallbonilla/Desktop/python-adrian && python3 -m streamlit run interfaz_web.py > streamlit.log 2>&1 &
+
+
+================================================================================
+5. VERIFICAR ESTADO
+================================================================================
+
+Ver si Streamlit está corriendo:
+---------------------------------
+ps aux | grep streamlit | grep -v grep
+
+Ver el puerto usado:
+--------------------
+lsof -i :8501
+
+
+================================================================================
+6. ACCESO DESDE OTROS DISPOSITIVOS
+================================================================================
+
+Desde tu Mac:
+-------------
+http://localhost:8501
+
+Desde otro dispositivo en tu red WiFi:
+---------------------------------------
+1. Averigua tu IP local:
+   ifconfig | grep "inet " | grep -v 127.0.0.1
+
+2. Usa la IP en el otro dispositivo:
+   http://TU_IP_LOCAL:8501
+   Ejemplo: http://192.168.1.217:8501
+
+
+================================================================================
+7. CAMBIAR PUERTO (OPCIONAL)
+================================================================================
+
+Si el puerto 8501 está ocupado:
+--------------------------------
+python3 -m streamlit run interfaz_web.py --server.port 8502
+
+Luego accede en: http://localhost:8502
+
+
+================================================================================
+8. SOLUCIÓN DE PROBLEMAS
+================================================================================
+
+Problema: "Address already in use"
+-----------------------------------
+Solución: El puerto está ocupado. Detén el proceso anterior:
+pkill -f "streamlit"
+
+O usa otro puerto:
+python3 -m streamlit run interfaz_web.py --server.port 8502
+
+
+Problema: "ModuleNotFoundError: streamlit"
+-------------------------------------------
+Solución: Instala Streamlit:
+pip3 install streamlit
+
+
+Problema: La interfaz no abre automáticamente
+----------------------------------------------
+Solución: Abre manualmente tu navegador y ve a:
+http://localhost:8501
+
+
+Problema: Cambios en interfaz_web.py no se reflejan
+----------------------------------------------------
+Solución: Streamlit detecta cambios automáticamente.
+Si no funciona, presiona "R" en la interfaz o reinicia:
+pkill -f "streamlit" && python3 -m streamlit run interfaz_web.py
+
+
+Problema: Error al cargar datos
+--------------------------------
+Solución: Verifica que los archivos .npz existen en:
+ls -lh resultados/datos/
+
+Si no existen, ejecuta una simulación primero.
+
+
+================================================================================
+9. CONFIGURACIÓN AVANZADA
+================================================================================
+
+Archivo de configuración:
+--------------------------
+Ubicación: ~/.streamlit/config.toml
+
+Contenido actual:
+[general]
+email = ""
+
+[server]
+headless = true
+port = 8501
+
+[browser]
+gatherUsageStats = false
+
+
+Editar configuración:
+---------------------
+nano ~/.streamlit/config.toml
+
+Opciones útiles:
+- server.port: Cambiar puerto por defecto
+- server.maxUploadSize: Tamaño máximo de archivos (MB)
+- theme.*: Personalizar colores
+
+
+================================================================================
+10. COMANDOS RÁPIDOS (COPIAR Y PEGAR)
+================================================================================
+
+Iniciar:
+--------
+cd /Users/randallbonilla/Desktop/python-adrian && python3 -m streamlit run interfaz_web.py
+
+Detener:
+--------
+pkill -f "streamlit"
+
+Ver estado:
+-----------
+ps aux | grep streamlit | grep -v grep
+
+Reiniciar:
+----------
+pkill -f "streamlit" && sleep 1 && cd /Users/randallbonilla/Desktop/python-adrian && python3 -m streamlit run interfaz_web.py &
+
+Ver log:
+--------
+tail -f /Users/randallbonilla/Desktop/python-adrian/streamlit.log
+
+
+================================================================================
+11. PRIMERA VEZ USANDO STREAMLIT
+================================================================================
+
+Paso 1: Abrir terminal
+
+Paso 2: Ejecutar:
+cd /Users/randallbonilla/Desktop/python-adrian
+python3 -m streamlit run interfaz_web.py
+
+Paso 3: Esperar que abra el navegador (o ir a http://localhost:8501)
+
+Paso 4: Configurar simulación en el sidebar (izquierda)
+
+Paso 5: Presionar "🚀 INICIAR SIMULACIÓN"
+
+Paso 6: Esperar 2-7 minutos
+
+Paso 7: Explorar resultados en las 4 tabs
+
+Paso 8: Para detener, presionar Ctrl+C en la terminal
+
+
+================================================================================
+12. TIPS Y MEJORES PRÁCTICAS
+================================================================================
+
+✅ Ejecuta en segundo plano si vas a usar la terminal para otras cosas
+
+✅ Guarda el log (> streamlit.log) para debugging posterior
+
+✅ Usa Ctrl+C para detener limpiamente (no mates el proceso)
+
+✅ Si la simulación es larga, no cierres el navegador ni la pestaña
+
+✅ Puedes ejecutar múltiples simulaciones sin reiniciar Streamlit
+
+✅ Los resultados se guardan automáticamente en resultados/datos/
+
+⚠️ No ejecutes múltiples instancias de Streamlit en el mismo puerto
+
+⚠️ Si cambias requirements.txt, reinicia Streamlit
+
+
+================================================================================
+13. INTEGRACIÓN CON OTRAS HERRAMIENTAS
+================================================================================
+
+Usar Streamlit + Jupyter:
+--------------------------
+1. Ejecuta Streamlit en background
+2. Usa Jupyter para análisis de resultados .npz
+3. Ambos pueden acceder a los mismos archivos
+
+
+Usar Streamlit + Terminal:
+---------------------------
+1. Ejecuta Streamlit en background
+2. Usa terminal para ejecutar simulaciones batch
+3. Streamlit puede visualizar resultados generados por terminal
+
+
+================================================================================
+14. RECURSOS ADICIONALES
+================================================================================
+
+Documentación oficial:
+----------------------
+https://docs.streamlit.io
+
+Comandos completos:
+-------------------
+streamlit --help
+python3 -m streamlit --help
+
+Documentación del proyecto:
+----------------------------
+Ver: INSTRUCCIONES_USO.txt
+Ver: README_INTERFAZ.md
+
+
+================================================================================
+RESUMEN DE COMANDOS MÁS USADOS
+================================================================================
+
+1. Iniciar:
+   cd /Users/randallbonilla/Desktop/python-adrian
+   python3 -m streamlit run interfaz_web.py
+
+2. Detener:
+   pkill -f "streamlit"
+
+3. Reiniciar:
+   pkill -f "streamlit" && sleep 1 && python3 -m streamlit run interfaz_web.py &
+
+4. Ver estado:
+   ps aux | grep streamlit | grep -v grep
+
+5. Acceder:
+   http://localhost:8501
+
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================
+
+Fecha: Octubre 2025
+Versión: 1.0
+Proyecto: Sistema de Enfriamiento GPU

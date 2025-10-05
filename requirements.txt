@@ -13,6 +13,7 @@ pandas>=2.0.0          # Manejo de datos tabulares
 numba>=0.57.0          # Aceleración JIT de bucles
 seaborn>=0.12.0        # Visualizaciones estadísticas
 tqdm>=4.65.0           # Barras de progreso
+streamlit>=1.28.0      # Interfaz web interactiva
 
 # Instalación:
 # pip install -r requirements.txt

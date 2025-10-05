@@ -1,0 +1,661 @@
+======================================================================
+TEST: SOLVER TEMPORAL COMPLETO (SIN PROMPT)
+Sistema de Enfriamiento GPU
+======================================================================
+
+⚙️  Inicializando...
+  Material: Aluminio 6061
+  Tiempo máximo: 30.0 s
+  Tolerancia: 1e-3 K/s
+
+🚀 Iniciando simulación...
+
+======================================================================
+SOLVER TEMPORAL COMPLETO - Sistema de Enfriamiento GPU
+======================================================================
+
+📐 PASO 1: Inicializando campos de temperatura...
+  ✅ Fluido: (60,) nodos @ 24.0°C
+  ✅ Placa: (60, 20) nodos @ 23.0°C
+  ✅ Aletas: 3 × (20, 10) nodos @ 23.0°C
+
+⏱️  PASO 2: Configurando pasos temporales...
+  dt_placa: 0.500 ms
+  dt_aletas: 0.0306 ms
+  Subpasos de aletas por paso de placa: 17
+
+🔧 PASO 3: Configurando simulación...
+  Tiempo máximo: 30.0 s
+  Pasos máximos: 60000
+  Guardar cada: 200 pasos
+  Criterio convergencia: max|dT/dt| < 1.0e-03 K/s
+
+🚀 PASO 4: Ejecutando bucle temporal...
+----------------------------------------------------------------------
+
+  t=  0.00s | max|dT/dt|=1.24e+04 K/s | T_f= 24.1°C | T_p= 23.0°C | T_a= 23.0°C
+         Balance: Q_in=7779.3W, Error=0.01%
+  t=  0.10s | max|dT/dt|=1.11e+03 K/s | T_f= 44.7°C | T_p= 23.0°C | T_a= 23.0°C
+         Balance: Q_in=7779.3W, Error=0.08%
+  t=  0.20s | max|dT/dt|=7.88e+02 K/s | T_f= 65.3°C | T_p= 23.1°C | T_a= 23.0°C
+         Balance: Q_in=7651.3W, Error=0.90%
+  t=  0.30s | max|dT/dt|=3.58e+02 K/s | T_f= 78.9°C | T_p= 23.2°C | T_a= 23.0°C
+         Balance: Q_in=1202.8W, Error=21.97%
+  t=  0.40s | max|dT/dt|=2.60e+00 K/s | T_f= 79.6°C | T_p= 23.4°C | T_a= 23.1°C
+         Balance: Q_in=100.3W, Error=22.95%
+  t=  0.50s | max|dT/dt|=1.94e+00 K/s | T_f= 79.6°C | T_p= 23.5°C | T_a= 23.2°C
+         Balance: Q_in=98.6W, Error=28.96%
+  t=  0.60s | max|dT/dt|=1.67e+00 K/s | T_f= 79.6°C | T_p= 23.6°C | T_a= 23.3°C
+         Balance: Q_in=98.3W, Error=33.34%
+  t=  0.70s | max|dT/dt|=1.54e+00 K/s | T_f= 79.6°C | T_p= 23.8°C | T_a= 23.4°C
+         Balance: Q_in=98.0W, Error=35.99%
+  t=  0.80s | max|dT/dt|=1.47e+00 K/s | T_f= 79.6°C | T_p= 23.9°C | T_a= 23.5°C
+         Balance: Q_in=97.8W, Error=37.48%
+  t=  0.90s | max|dT/dt|=1.44e+00 K/s | T_f= 79.6°C | T_p= 24.1°C | T_a= 23.6°C
+         Balance: Q_in=97.5W, Error=38.30%
+  t=  1.00s | max|dT/dt|=1.42e+00 K/s | T_f= 79.6°C | T_p= 24.2°C | T_a= 23.8°C
+         Balance: Q_in=97.3W, Error=38.73%
+  t=  1.10s | max|dT/dt|=1.41e+00 K/s | T_f= 79.6°C | T_p= 24.3°C | T_a= 23.9°C
+         Balance: Q_in=97.0W, Error=38.96%
+  t=  1.20s | max|dT/dt|=1.40e+00 K/s | T_f= 79.6°C | T_p= 24.5°C | T_a= 24.0°C
+         Balance: Q_in=96.8W, Error=39.08%
+  t=  1.30s | max|dT/dt|=1.39e+00 K/s | T_f= 79.6°C | T_p= 24.6°C | T_a= 24.2°C
+         Balance: Q_in=96.6W, Error=39.14%
+  t=  1.40s | max|dT/dt|=1.39e+00 K/s | T_f= 79.6°C | T_p= 24.7°C | T_a= 24.3°C
+         Balance: Q_in=96.3W, Error=39.17%
+  t=  1.50s | max|dT/dt|=1.38e+00 K/s | T_f= 79.6°C | T_p= 24.9°C | T_a= 24.4°C
+         Balance: Q_in=96.1W, Error=39.19%
+  t=  1.60s | max|dT/dt|=1.38e+00 K/s | T_f= 79.6°C | T_p= 25.0°C | T_a= 24.6°C
+         Balance: Q_in=95.9W, Error=39.20%
+  t=  1.70s | max|dT/dt|=1.37e+00 K/s | T_f= 79.6°C | T_p= 25.1°C | T_a= 24.7°C
+         Balance: Q_in=95.6W, Error=39.21%
+  t=  1.80s | max|dT/dt|=1.37e+00 K/s | T_f= 79.6°C | T_p= 25.3°C | T_a= 24.8°C
+         Balance: Q_in=95.4W, Error=39.22%
+  t=  1.90s | max|dT/dt|=1.36e+00 K/s | T_f= 79.6°C | T_p= 25.4°C | T_a= 25.0°C
+         Balance: Q_in=95.2W, Error=39.22%
+  t=  2.00s | max|dT/dt|=1.35e+00 K/s | T_f= 79.6°C | T_p= 25.5°C | T_a= 25.1°C
+         Balance: Q_in=94.9W, Error=39.23%
+  t=  2.10s | max|dT/dt|=1.35e+00 K/s | T_f= 79.6°C | T_p= 25.7°C | T_a= 25.2°C
+         Balance: Q_in=94.7W, Error=39.23%
+  t=  2.20s | max|dT/dt|=1.34e+00 K/s | T_f= 79.6°C | T_p= 25.8°C | T_a= 25.4°C
+         Balance: Q_in=94.5W, Error=39.23%
+  t=  2.30s | max|dT/dt|=1.34e+00 K/s | T_f= 79.6°C | T_p= 25.9°C | T_a= 25.5°C
+         Balance: Q_in=94.3W, Error=39.24%
+  t=  2.40s | max|dT/dt|=1.33e+00 K/s | T_f= 79.6°C | T_p= 26.1°C | T_a= 25.6°C
+         Balance: Q_in=94.0W, Error=39.24%
+  t=  2.50s | max|dT/dt|=1.33e+00 K/s | T_f= 79.7°C | T_p= 26.2°C | T_a= 25.8°C
+         Balance: Q_in=93.8W, Error=39.25%
+  t=  2.60s | max|dT/dt|=1.33e+00 K/s | T_f= 79.7°C | T_p= 26.3°C | T_a= 25.9°C
+         Balance: Q_in=93.6W, Error=39.25%
+  t=  2.70s | max|dT/dt|=1.32e+00 K/s | T_f= 79.7°C | T_p= 26.4°C | T_a= 26.0°C
+         Balance: Q_in=93.4W, Error=39.25%
+  t=  2.80s | max|dT/dt|=1.32e+00 K/s | T_f= 79.7°C | T_p= 26.6°C | T_a= 26.2°C
+         Balance: Q_in=93.1W, Error=39.26%
+  t=  2.90s | max|dT/dt|=1.31e+00 K/s | T_f= 79.7°C | T_p= 26.7°C | T_a= 26.3°C
+         Balance: Q_in=92.9W, Error=39.26%
+  t=  3.00s | max|dT/dt|=1.31e+00 K/s | T_f= 79.7°C | T_p= 26.8°C | T_a= 26.4°C
+         Balance: Q_in=92.7W, Error=39.26%
+  t=  3.10s | max|dT/dt|=1.30e+00 K/s | T_f= 79.7°C | T_p= 27.0°C | T_a= 26.6°C
+         Balance: Q_in=92.5W, Error=39.27%
+  t=  3.20s | max|dT/dt|=1.30e+00 K/s | T_f= 79.7°C | T_p= 27.1°C | T_a= 26.7°C
+         Balance: Q_in=92.2W, Error=39.27%
+  t=  3.30s | max|dT/dt|=1.30e+00 K/s | T_f= 79.7°C | T_p= 27.2°C | T_a= 26.8°C
+         Balance: Q_in=92.0W, Error=39.28%
+  t=  3.40s | max|dT/dt|=1.29e+00 K/s | T_f= 79.7°C | T_p= 27.3°C | T_a= 26.9°C
+         Balance: Q_in=91.8W, Error=39.28%
+  t=  3.50s | max|dT/dt|=1.29e+00 K/s | T_f= 79.7°C | T_p= 27.5°C | T_a= 27.1°C
+         Balance: Q_in=91.6W, Error=39.28%
+  t=  3.60s | max|dT/dt|=1.29e+00 K/s | T_f= 79.7°C | T_p= 27.6°C | T_a= 27.2°C
+         Balance: Q_in=91.3W, Error=39.29%
+  t=  3.70s | max|dT/dt|=1.28e+00 K/s | T_f= 79.7°C | T_p= 27.7°C | T_a= 27.3°C
+         Balance: Q_in=91.1W, Error=39.29%
+  t=  3.80s | max|dT/dt|=1.28e+00 K/s | T_f= 79.7°C | T_p= 27.9°C | T_a= 27.5°C
+         Balance: Q_in=90.9W, Error=39.30%
+  t=  3.90s | max|dT/dt|=1.27e+00 K/s | T_f= 79.7°C | T_p= 28.0°C | T_a= 27.6°C
+         Balance: Q_in=90.7W, Error=39.30%
+  t=  4.00s | max|dT/dt|=1.27e+00 K/s | T_f= 79.7°C | T_p= 28.1°C | T_a= 27.7°C
+         Balance: Q_in=90.5W, Error=39.30%
+  t=  4.10s | max|dT/dt|=1.27e+00 K/s | T_f= 79.7°C | T_p= 28.2°C | T_a= 27.8°C
+         Balance: Q_in=90.2W, Error=39.31%
+  t=  4.20s | max|dT/dt|=1.26e+00 K/s | T_f= 79.7°C | T_p= 28.4°C | T_a= 28.0°C
+         Balance: Q_in=90.0W, Error=39.31%
+  t=  4.30s | max|dT/dt|=1.26e+00 K/s | T_f= 79.7°C | T_p= 28.5°C | T_a= 28.1°C
+         Balance: Q_in=89.8W, Error=39.32%
+  t=  4.40s | max|dT/dt|=1.26e+00 K/s | T_f= 79.7°C | T_p= 28.6°C | T_a= 28.2°C
+         Balance: Q_in=89.6W, Error=39.32%
+  t=  4.50s | max|dT/dt|=1.25e+00 K/s | T_f= 79.7°C | T_p= 28.7°C | T_a= 28.3°C
+         Balance: Q_in=89.4W, Error=39.32%
+  t=  4.60s | max|dT/dt|=1.25e+00 K/s | T_f= 79.7°C | T_p= 28.9°C | T_a= 28.5°C
+         Balance: Q_in=89.2W, Error=39.33%
+  t=  4.70s | max|dT/dt|=1.25e+00 K/s | T_f= 79.7°C | T_p= 29.0°C | T_a= 28.6°C
+         Balance: Q_in=88.9W, Error=39.33%
+  t=  4.80s | max|dT/dt|=1.24e+00 K/s | T_f= 79.7°C | T_p= 29.1°C | T_a= 28.7°C
+         Balance: Q_in=88.7W, Error=39.34%
+  t=  4.90s | max|dT/dt|=1.24e+00 K/s | T_f= 79.7°C | T_p= 29.2°C | T_a= 28.8°C
+         Balance: Q_in=88.5W, Error=39.34%
+  t=  5.00s | max|dT/dt|=1.24e+00 K/s | T_f= 79.7°C | T_p= 29.3°C | T_a= 29.0°C
+         Balance: Q_in=88.3W, Error=39.35%
+  t=  5.10s | max|dT/dt|=1.23e+00 K/s | T_f= 79.7°C | T_p= 29.5°C | T_a= 29.1°C
+         Balance: Q_in=88.1W, Error=39.35%
+  t=  5.20s | max|dT/dt|=1.23e+00 K/s | T_f= 79.7°C | T_p= 29.6°C | T_a= 29.2°C
+         Balance: Q_in=87.9W, Error=39.35%
+  t=  5.30s | max|dT/dt|=1.23e+00 K/s | T_f= 79.7°C | T_p= 29.7°C | T_a= 29.3°C
+         Balance: Q_in=87.7W, Error=39.36%
+  t=  5.40s | max|dT/dt|=1.23e+00 K/s | T_f= 79.7°C | T_p= 29.8°C | T_a= 29.4°C
+         Balance: Q_in=87.4W, Error=39.36%
+  t=  5.50s | max|dT/dt|=1.22e+00 K/s | T_f= 79.7°C | T_p= 30.0°C | T_a= 29.6°C
+         Balance: Q_in=87.2W, Error=39.37%
+  t=  5.60s | max|dT/dt|=1.22e+00 K/s | T_f= 79.7°C | T_p= 30.1°C | T_a= 29.7°C
+         Balance: Q_in=87.0W, Error=39.37%
+  t=  5.70s | max|dT/dt|=1.22e+00 K/s | T_f= 79.7°C | T_p= 30.2°C | T_a= 29.8°C
+         Balance: Q_in=86.8W, Error=39.37%
+  t=  5.80s | max|dT/dt|=1.21e+00 K/s | T_f= 79.7°C | T_p= 30.3°C | T_a= 29.9°C
+         Balance: Q_in=86.6W, Error=39.38%
+  t=  5.90s | max|dT/dt|=1.21e+00 K/s | T_f= 79.7°C | T_p= 30.4°C | T_a= 30.1°C
+         Balance: Q_in=86.4W, Error=39.38%
+  t=  6.00s | max|dT/dt|=1.21e+00 K/s | T_f= 79.7°C | T_p= 30.6°C | T_a= 30.2°C
+         Balance: Q_in=86.2W, Error=39.39%
+  t=  6.10s | max|dT/dt|=1.20e+00 K/s | T_f= 79.7°C | T_p= 30.7°C | T_a= 30.3°C
+         Balance: Q_in=86.0W, Error=39.39%
+  t=  6.20s | max|dT/dt|=1.20e+00 K/s | T_f= 79.7°C | T_p= 30.8°C | T_a= 30.4°C
+         Balance: Q_in=85.8W, Error=39.40%
+  t=  6.30s | max|dT/dt|=1.20e+00 K/s | T_f= 79.7°C | T_p= 30.9°C | T_a= 30.5°C
+         Balance: Q_in=85.6W, Error=39.40%
+  t=  6.40s | max|dT/dt|=1.19e+00 K/s | T_f= 79.7°C | T_p= 31.0°C | T_a= 30.7°C
+         Balance: Q_in=85.4W, Error=39.40%
+  t=  6.50s | max|dT/dt|=1.19e+00 K/s | T_f= 79.7°C | T_p= 31.1°C | T_a= 30.8°C
+         Balance: Q_in=85.2W, Error=39.41%
+  t=  6.60s | max|dT/dt|=1.19e+00 K/s | T_f= 79.7°C | T_p= 31.3°C | T_a= 30.9°C
+         Balance: Q_in=84.9W, Error=39.41%
+  t=  6.70s | max|dT/dt|=1.19e+00 K/s | T_f= 79.7°C | T_p= 31.4°C | T_a= 31.0°C
+         Balance: Q_in=84.7W, Error=39.42%
+  t=  6.80s | max|dT/dt|=1.18e+00 K/s | T_f= 79.7°C | T_p= 31.5°C | T_a= 31.1°C
+         Balance: Q_in=84.5W, Error=39.42%
+  t=  6.90s | max|dT/dt|=1.18e+00 K/s | T_f= 79.7°C | T_p= 31.6°C | T_a= 31.2°C
+         Balance: Q_in=84.3W, Error=39.43%
+  t=  7.00s | max|dT/dt|=1.18e+00 K/s | T_f= 79.7°C | T_p= 31.7°C | T_a= 31.4°C
+         Balance: Q_in=84.1W, Error=39.43%
+  t=  7.10s | max|dT/dt|=1.17e+00 K/s | T_f= 79.7°C | T_p= 31.9°C | T_a= 31.5°C
+         Balance: Q_in=83.9W, Error=39.43%
+  t=  7.20s | max|dT/dt|=1.17e+00 K/s | T_f= 79.7°C | T_p= 32.0°C | T_a= 31.6°C
+         Balance: Q_in=83.7W, Error=39.44%
+  t=  7.30s | max|dT/dt|=1.17e+00 K/s | T_f= 79.7°C | T_p= 32.1°C | T_a= 31.7°C
+         Balance: Q_in=83.5W, Error=39.44%
+  t=  7.40s | max|dT/dt|=1.17e+00 K/s | T_f= 79.7°C | T_p= 32.2°C | T_a= 31.8°C
+         Balance: Q_in=83.3W, Error=39.45%
+  t=  7.50s | max|dT/dt|=1.16e+00 K/s | T_f= 79.7°C | T_p= 32.3°C | T_a= 31.9°C
+         Balance: Q_in=83.1W, Error=39.45%
+  t=  7.60s | max|dT/dt|=1.16e+00 K/s | T_f= 79.7°C | T_p= 32.4°C | T_a= 32.1°C
+         Balance: Q_in=82.9W, Error=39.46%
+  t=  7.70s | max|dT/dt|=1.16e+00 K/s | T_f= 79.7°C | T_p= 32.5°C | T_a= 32.2°C
+         Balance: Q_in=82.7W, Error=39.46%
+  t=  7.80s | max|dT/dt|=1.15e+00 K/s | T_f= 79.7°C | T_p= 32.7°C | T_a= 32.3°C
+         Balance: Q_in=82.5W, Error=39.47%
+  t=  7.90s | max|dT/dt|=1.15e+00 K/s | T_f= 79.7°C | T_p= 32.8°C | T_a= 32.4°C
+         Balance: Q_in=82.3W, Error=39.47%
+  t=  8.00s | max|dT/dt|=1.15e+00 K/s | T_f= 79.7°C | T_p= 32.9°C | T_a= 32.5°C
+         Balance: Q_in=82.1W, Error=39.47%
+  t=  8.10s | max|dT/dt|=1.14e+00 K/s | T_f= 79.7°C | T_p= 33.0°C | T_a= 32.6°C
+         Balance: Q_in=81.9W, Error=39.48%
+  t=  8.20s | max|dT/dt|=1.14e+00 K/s | T_f= 79.7°C | T_p= 33.1°C | T_a= 32.8°C
+         Balance: Q_in=81.7W, Error=39.48%
+  t=  8.30s | max|dT/dt|=1.14e+00 K/s | T_f= 79.7°C | T_p= 33.2°C | T_a= 32.9°C
+         Balance: Q_in=81.5W, Error=39.49%
+  t=  8.40s | max|dT/dt|=1.14e+00 K/s | T_f= 79.7°C | T_p= 33.3°C | T_a= 33.0°C
+         Balance: Q_in=81.3W, Error=39.49%
+  t=  8.50s | max|dT/dt|=1.13e+00 K/s | T_f= 79.7°C | T_p= 33.5°C | T_a= 33.1°C
+         Balance: Q_in=81.1W, Error=39.50%
+  t=  8.60s | max|dT/dt|=1.13e+00 K/s | T_f= 79.7°C | T_p= 33.6°C | T_a= 33.2°C
+         Balance: Q_in=80.9W, Error=39.50%
+  t=  8.70s | max|dT/dt|=1.13e+00 K/s | T_f= 79.7°C | T_p= 33.7°C | T_a= 33.3°C
+         Balance: Q_in=80.7W, Error=39.51%
+  t=  8.80s | max|dT/dt|=1.13e+00 K/s | T_f= 79.7°C | T_p= 33.8°C | T_a= 33.4°C
+         Balance: Q_in=80.6W, Error=39.51%
+  t=  8.90s | max|dT/dt|=1.12e+00 K/s | T_f= 79.7°C | T_p= 33.9°C | T_a= 33.5°C
+         Balance: Q_in=80.4W, Error=39.52%
+  t=  9.00s | max|dT/dt|=1.12e+00 K/s | T_f= 79.7°C | T_p= 34.0°C | T_a= 33.7°C
+         Balance: Q_in=80.2W, Error=39.52%
+  t=  9.10s | max|dT/dt|=1.12e+00 K/s | T_f= 79.7°C | T_p= 34.1°C | T_a= 33.8°C
+         Balance: Q_in=80.0W, Error=39.52%
+  t=  9.20s | max|dT/dt|=1.11e+00 K/s | T_f= 79.7°C | T_p= 34.2°C | T_a= 33.9°C
+         Balance: Q_in=79.8W, Error=39.53%
+  t=  9.30s | max|dT/dt|=1.11e+00 K/s | T_f= 79.7°C | T_p= 34.3°C | T_a= 34.0°C
+         Balance: Q_in=79.6W, Error=39.53%
+  t=  9.40s | max|dT/dt|=1.11e+00 K/s | T_f= 79.7°C | T_p= 34.5°C | T_a= 34.1°C
+         Balance: Q_in=79.4W, Error=39.54%
+  t=  9.50s | max|dT/dt|=1.11e+00 K/s | T_f= 79.7°C | T_p= 34.6°C | T_a= 34.2°C
+         Balance: Q_in=79.2W, Error=39.54%
+  t=  9.60s | max|dT/dt|=1.10e+00 K/s | T_f= 79.7°C | T_p= 34.7°C | T_a= 34.3°C
+         Balance: Q_in=79.0W, Error=39.55%
+  t=  9.70s | max|dT/dt|=1.10e+00 K/s | T_f= 79.7°C | T_p= 34.8°C | T_a= 34.4°C
+         Balance: Q_in=78.8W, Error=39.55%
+  t=  9.80s | max|dT/dt|=1.10e+00 K/s | T_f= 79.7°C | T_p= 34.9°C | T_a= 34.5°C
+         Balance: Q_in=78.6W, Error=39.56%
+  t=  9.90s | max|dT/dt|=1.10e+00 K/s | T_f= 79.7°C | T_p= 35.0°C | T_a= 34.7°C
+         Balance: Q_in=78.4W, Error=39.56%
+  t= 10.00s | max|dT/dt|=1.09e+00 K/s | T_f= 79.7°C | T_p= 35.1°C | T_a= 34.8°C
+         Balance: Q_in=78.3W, Error=39.57%
+  t= 10.10s | max|dT/dt|=1.09e+00 K/s | T_f= 79.7°C | T_p= 35.2°C | T_a= 34.9°C
+         Balance: Q_in=78.1W, Error=39.57%
+  t= 10.20s | max|dT/dt|=1.09e+00 K/s | T_f= 79.7°C | T_p= 35.3°C | T_a= 35.0°C
+         Balance: Q_in=77.9W, Error=39.58%
+  t= 10.30s | max|dT/dt|=1.08e+00 K/s | T_f= 79.7°C | T_p= 35.4°C | T_a= 35.1°C
+         Balance: Q_in=77.7W, Error=39.58%
+  t= 10.40s | max|dT/dt|=1.08e+00 K/s | T_f= 79.7°C | T_p= 35.5°C | T_a= 35.2°C
+         Balance: Q_in=77.5W, Error=39.58%
+  t= 10.50s | max|dT/dt|=1.08e+00 K/s | T_f= 79.7°C | T_p= 35.6°C | T_a= 35.3°C
+         Balance: Q_in=77.3W, Error=39.59%
+  t= 10.60s | max|dT/dt|=1.08e+00 K/s | T_f= 79.7°C | T_p= 35.8°C | T_a= 35.4°C
+         Balance: Q_in=77.1W, Error=39.59%
+  t= 10.70s | max|dT/dt|=1.07e+00 K/s | T_f= 79.7°C | T_p= 35.9°C | T_a= 35.5°C
+         Balance: Q_in=76.9W, Error=39.60%
+  t= 10.80s | max|dT/dt|=1.07e+00 K/s | T_f= 79.7°C | T_p= 36.0°C | T_a= 35.6°C
+         Balance: Q_in=76.8W, Error=39.60%
+  t= 10.90s | max|dT/dt|=1.07e+00 K/s | T_f= 79.7°C | T_p= 36.1°C | T_a= 35.7°C
+         Balance: Q_in=76.6W, Error=39.61%
+  t= 11.00s | max|dT/dt|=1.07e+00 K/s | T_f= 79.7°C | T_p= 36.2°C | T_a= 35.8°C
+         Balance: Q_in=76.4W, Error=39.61%
+  t= 11.10s | max|dT/dt|=1.06e+00 K/s | T_f= 79.7°C | T_p= 36.3°C | T_a= 35.9°C
+         Balance: Q_in=76.2W, Error=39.62%
+  t= 11.20s | max|dT/dt|=1.06e+00 K/s | T_f= 79.7°C | T_p= 36.4°C | T_a= 36.1°C
+         Balance: Q_in=76.0W, Error=39.62%
+  t= 11.30s | max|dT/dt|=1.06e+00 K/s | T_f= 79.7°C | T_p= 36.5°C | T_a= 36.2°C
+         Balance: Q_in=75.8W, Error=39.63%
+  t= 11.40s | max|dT/dt|=1.06e+00 K/s | T_f= 79.7°C | T_p= 36.6°C | T_a= 36.3°C
+         Balance: Q_in=75.7W, Error=39.63%
+  t= 11.50s | max|dT/dt|=1.05e+00 K/s | T_f= 79.7°C | T_p= 36.7°C | T_a= 36.4°C
+         Balance: Q_in=75.5W, Error=39.64%
+  t= 11.60s | max|dT/dt|=1.05e+00 K/s | T_f= 79.7°C | T_p= 36.8°C | T_a= 36.5°C
+         Balance: Q_in=75.3W, Error=39.64%
+  t= 11.70s | max|dT/dt|=1.05e+00 K/s | T_f= 79.7°C | T_p= 36.9°C | T_a= 36.6°C
+         Balance: Q_in=75.1W, Error=39.65%
+  t= 11.80s | max|dT/dt|=1.04e+00 K/s | T_f= 79.7°C | T_p= 37.0°C | T_a= 36.7°C
+         Balance: Q_in=74.9W, Error=39.65%
+  t= 11.90s | max|dT/dt|=1.04e+00 K/s | T_f= 79.7°C | T_p= 37.1°C | T_a= 36.8°C
+         Balance: Q_in=74.7W, Error=39.66%
+  t= 12.00s | max|dT/dt|=1.04e+00 K/s | T_f= 79.7°C | T_p= 37.2°C | T_a= 36.9°C
+         Balance: Q_in=74.6W, Error=39.66%
+  t= 12.10s | max|dT/dt|=1.04e+00 K/s | T_f= 79.7°C | T_p= 37.3°C | T_a= 37.0°C
+         Balance: Q_in=74.4W, Error=39.67%
+  t= 12.20s | max|dT/dt|=1.03e+00 K/s | T_f= 79.7°C | T_p= 37.4°C | T_a= 37.1°C
+         Balance: Q_in=74.2W, Error=39.67%
+  t= 12.30s | max|dT/dt|=1.03e+00 K/s | T_f= 79.7°C | T_p= 37.5°C | T_a= 37.2°C
+         Balance: Q_in=74.0W, Error=39.68%
+  t= 12.40s | max|dT/dt|=1.03e+00 K/s | T_f= 79.7°C | T_p= 37.6°C | T_a= 37.3°C
+         Balance: Q_in=73.9W, Error=39.68%
+  t= 12.50s | max|dT/dt|=1.03e+00 K/s | T_f= 79.7°C | T_p= 37.7°C | T_a= 37.4°C
+         Balance: Q_in=73.7W, Error=39.69%
+  t= 12.60s | max|dT/dt|=1.02e+00 K/s | T_f= 79.7°C | T_p= 37.8°C | T_a= 37.5°C
+         Balance: Q_in=73.5W, Error=39.69%
+  t= 12.70s | max|dT/dt|=1.02e+00 K/s | T_f= 79.7°C | T_p= 37.9°C | T_a= 37.6°C
+         Balance: Q_in=73.3W, Error=39.70%
+  t= 12.80s | max|dT/dt|=1.02e+00 K/s | T_f= 79.7°C | T_p= 38.0°C | T_a= 37.7°C
+         Balance: Q_in=73.1W, Error=39.70%
+  t= 12.90s | max|dT/dt|=1.02e+00 K/s | T_f= 79.7°C | T_p= 38.1°C | T_a= 37.8°C
+         Balance: Q_in=73.0W, Error=39.71%
+  t= 13.00s | max|dT/dt|=1.01e+00 K/s | T_f= 79.7°C | T_p= 38.2°C | T_a= 37.9°C
+         Balance: Q_in=72.8W, Error=39.71%
+  t= 13.10s | max|dT/dt|=1.01e+00 K/s | T_f= 79.7°C | T_p= 38.3°C | T_a= 38.0°C
+         Balance: Q_in=72.6W, Error=39.72%
+  t= 13.20s | max|dT/dt|=1.01e+00 K/s | T_f= 79.7°C | T_p= 38.4°C | T_a= 38.1°C
+         Balance: Q_in=72.4W, Error=39.72%
+  t= 13.30s | max|dT/dt|=1.01e+00 K/s | T_f= 79.7°C | T_p= 38.5°C | T_a= 38.2°C
+         Balance: Q_in=72.3W, Error=39.73%
+  t= 13.40s | max|dT/dt|=1.00e+00 K/s | T_f= 79.7°C | T_p= 38.6°C | T_a= 38.3°C
+         Balance: Q_in=72.1W, Error=39.73%
+  t= 13.50s | max|dT/dt|=1.00e+00 K/s | T_f= 79.7°C | T_p= 38.7°C | T_a= 38.4°C
+         Balance: Q_in=71.9W, Error=39.74%
+  t= 13.60s | max|dT/dt|=1.00e+00 K/s | T_f= 79.7°C | T_p= 38.8°C | T_a= 38.5°C
+         Balance: Q_in=71.7W, Error=39.74%
+  t= 13.70s | max|dT/dt|=9.97e-01 K/s | T_f= 79.7°C | T_p= 38.9°C | T_a= 38.6°C
+         Balance: Q_in=71.6W, Error=39.75%
+  t= 13.80s | max|dT/dt|=9.95e-01 K/s | T_f= 79.7°C | T_p= 39.0°C | T_a= 38.7°C
+         Balance: Q_in=71.4W, Error=39.75%
+  t= 13.90s | max|dT/dt|=9.92e-01 K/s | T_f= 79.7°C | T_p= 39.1°C | T_a= 38.8°C
+         Balance: Q_in=71.2W, Error=39.76%
+  t= 14.00s | max|dT/dt|=9.90e-01 K/s | T_f= 79.7°C | T_p= 39.2°C | T_a= 38.9°C
+         Balance: Q_in=71.1W, Error=39.76%
+  t= 14.10s | max|dT/dt|=9.87e-01 K/s | T_f= 79.7°C | T_p= 39.3°C | T_a= 39.0°C
+         Balance: Q_in=70.9W, Error=39.77%
+  t= 14.20s | max|dT/dt|=9.85e-01 K/s | T_f= 79.7°C | T_p= 39.4°C | T_a= 39.1°C
+         Balance: Q_in=70.7W, Error=39.77%
+  t= 14.30s | max|dT/dt|=9.83e-01 K/s | T_f= 79.7°C | T_p= 39.5°C | T_a= 39.2°C
+         Balance: Q_in=70.5W, Error=39.78%
+  t= 14.40s | max|dT/dt|=9.80e-01 K/s | T_f= 79.7°C | T_p= 39.6°C | T_a= 39.3°C
+         Balance: Q_in=70.4W, Error=39.78%
+  t= 14.50s | max|dT/dt|=9.78e-01 K/s | T_f= 79.7°C | T_p= 39.7°C | T_a= 39.4°C
+         Balance: Q_in=70.2W, Error=39.79%
+  t= 14.60s | max|dT/dt|=9.75e-01 K/s | T_f= 79.7°C | T_p= 39.8°C | T_a= 39.5°C
+         Balance: Q_in=70.0W, Error=39.79%
+  t= 14.70s | max|dT/dt|=9.73e-01 K/s | T_f= 79.7°C | T_p= 39.9°C | T_a= 39.6°C
+         Balance: Q_in=69.9W, Error=39.80%
+  t= 14.80s | max|dT/dt|=9.71e-01 K/s | T_f= 79.7°C | T_p= 40.0°C | T_a= 39.7°C
+         Balance: Q_in=69.7W, Error=39.80%
+  t= 14.90s | max|dT/dt|=9.68e-01 K/s | T_f= 79.7°C | T_p= 40.1°C | T_a= 39.8°C
+         Balance: Q_in=69.5W, Error=39.81%
+  t= 15.00s | max|dT/dt|=9.66e-01 K/s | T_f= 79.7°C | T_p= 40.2°C | T_a= 39.9°C
+         Balance: Q_in=69.4W, Error=39.81%
+  t= 15.10s | max|dT/dt|=9.63e-01 K/s | T_f= 79.7°C | T_p= 40.3°C | T_a= 40.0°C
+         Balance: Q_in=69.2W, Error=39.82%
+  t= 15.20s | max|dT/dt|=9.61e-01 K/s | T_f= 79.7°C | T_p= 40.4°C | T_a= 40.1°C
+         Balance: Q_in=69.0W, Error=39.83%
+  t= 15.30s | max|dT/dt|=9.59e-01 K/s | T_f= 79.7°C | T_p= 40.5°C | T_a= 40.2°C
+         Balance: Q_in=68.9W, Error=39.83%
+  t= 15.40s | max|dT/dt|=9.56e-01 K/s | T_f= 79.7°C | T_p= 40.6°C | T_a= 40.3°C
+         Balance: Q_in=68.7W, Error=39.84%
+  t= 15.50s | max|dT/dt|=9.54e-01 K/s | T_f= 79.7°C | T_p= 40.7°C | T_a= 40.4°C
+         Balance: Q_in=68.5W, Error=39.84%
+  t= 15.60s | max|dT/dt|=9.52e-01 K/s | T_f= 79.7°C | T_p= 40.8°C | T_a= 40.5°C
+         Balance: Q_in=68.4W, Error=39.85%
+  t= 15.70s | max|dT/dt|=9.49e-01 K/s | T_f= 79.7°C | T_p= 40.9°C | T_a= 40.6°C
+         Balance: Q_in=68.2W, Error=39.85%
+  t= 15.80s | max|dT/dt|=9.47e-01 K/s | T_f= 79.7°C | T_p= 41.0°C | T_a= 40.7°C
+         Balance: Q_in=68.0W, Error=39.86%
+  t= 15.90s | max|dT/dt|=9.45e-01 K/s | T_f= 79.7°C | T_p= 41.1°C | T_a= 40.8°C
+         Balance: Q_in=67.9W, Error=39.86%
+  t= 16.00s | max|dT/dt|=9.42e-01 K/s | T_f= 79.7°C | T_p= 41.1°C | T_a= 40.8°C
+         Balance: Q_in=67.7W, Error=39.87%
+  t= 16.10s | max|dT/dt|=9.40e-01 K/s | T_f= 79.7°C | T_p= 41.2°C | T_a= 40.9°C
+         Balance: Q_in=67.6W, Error=39.87%
+  t= 16.20s | max|dT/dt|=9.38e-01 K/s | T_f= 79.7°C | T_p= 41.3°C | T_a= 41.0°C
+         Balance: Q_in=67.4W, Error=39.88%
+  t= 16.30s | max|dT/dt|=9.35e-01 K/s | T_f= 79.7°C | T_p= 41.4°C | T_a= 41.1°C
+         Balance: Q_in=67.2W, Error=39.88%
+  t= 16.40s | max|dT/dt|=9.33e-01 K/s | T_f= 79.7°C | T_p= 41.5°C | T_a= 41.2°C
+         Balance: Q_in=67.1W, Error=39.89%
+  t= 16.50s | max|dT/dt|=9.31e-01 K/s | T_f= 79.8°C | T_p= 41.6°C | T_a= 41.3°C
+         Balance: Q_in=66.9W, Error=39.89%
+  t= 16.60s | max|dT/dt|=9.28e-01 K/s | T_f= 79.8°C | T_p= 41.7°C | T_a= 41.4°C
+         Balance: Q_in=66.8W, Error=39.90%
+  t= 16.70s | max|dT/dt|=9.26e-01 K/s | T_f= 79.8°C | T_p= 41.8°C | T_a= 41.5°C
+         Balance: Q_in=66.6W, Error=39.91%
+  t= 16.80s | max|dT/dt|=9.24e-01 K/s | T_f= 79.8°C | T_p= 41.9°C | T_a= 41.6°C
+         Balance: Q_in=66.4W, Error=39.91%
+  t= 16.90s | max|dT/dt|=9.22e-01 K/s | T_f= 79.8°C | T_p= 42.0°C | T_a= 41.7°C
+         Balance: Q_in=66.3W, Error=39.92%
+  t= 17.00s | max|dT/dt|=9.19e-01 K/s | T_f= 79.8°C | T_p= 42.1°C | T_a= 41.8°C
+         Balance: Q_in=66.1W, Error=39.92%
+  t= 17.10s | max|dT/dt|=9.17e-01 K/s | T_f= 79.8°C | T_p= 42.2°C | T_a= 41.9°C
+         Balance: Q_in=66.0W, Error=39.93%
+  t= 17.20s | max|dT/dt|=9.15e-01 K/s | T_f= 79.8°C | T_p= 42.3°C | T_a= 42.0°C
+         Balance: Q_in=65.8W, Error=39.93%
+  t= 17.30s | max|dT/dt|=9.13e-01 K/s | T_f= 79.8°C | T_p= 42.3°C | T_a= 42.0°C
+         Balance: Q_in=65.6W, Error=39.94%
+  t= 17.40s | max|dT/dt|=9.10e-01 K/s | T_f= 79.8°C | T_p= 42.4°C | T_a= 42.1°C
+         Balance: Q_in=65.5W, Error=39.94%
+  t= 17.50s | max|dT/dt|=9.08e-01 K/s | T_f= 79.8°C | T_p= 42.5°C | T_a= 42.2°C
+         Balance: Q_in=65.3W, Error=39.95%
+  t= 17.60s | max|dT/dt|=9.06e-01 K/s | T_f= 79.8°C | T_p= 42.6°C | T_a= 42.3°C
+         Balance: Q_in=65.2W, Error=39.96%
+  t= 17.70s | max|dT/dt|=9.04e-01 K/s | T_f= 79.8°C | T_p= 42.7°C | T_a= 42.4°C
+         Balance: Q_in=65.0W, Error=39.96%
+  t= 17.80s | max|dT/dt|=9.01e-01 K/s | T_f= 79.8°C | T_p= 42.8°C | T_a= 42.5°C
+         Balance: Q_in=64.9W, Error=39.97%
+  t= 17.90s | max|dT/dt|=8.99e-01 K/s | T_f= 79.8°C | T_p= 42.9°C | T_a= 42.6°C
+         Balance: Q_in=64.7W, Error=39.97%
+  t= 18.00s | max|dT/dt|=8.97e-01 K/s | T_f= 79.8°C | T_p= 43.0°C | T_a= 42.7°C
+         Balance: Q_in=64.5W, Error=39.98%
+  t= 18.10s | max|dT/dt|=8.95e-01 K/s | T_f= 79.8°C | T_p= 43.1°C | T_a= 42.8°C
+         Balance: Q_in=64.4W, Error=39.98%
+  t= 18.20s | max|dT/dt|=8.92e-01 K/s | T_f= 79.8°C | T_p= 43.1°C | T_a= 42.9°C
+         Balance: Q_in=64.2W, Error=39.99%
+  t= 18.30s | max|dT/dt|=8.90e-01 K/s | T_f= 79.8°C | T_p= 43.2°C | T_a= 42.9°C
+         Balance: Q_in=64.1W, Error=40.00%
+  t= 18.40s | max|dT/dt|=8.88e-01 K/s | T_f= 79.8°C | T_p= 43.3°C | T_a= 43.0°C
+         Balance: Q_in=63.9W, Error=40.00%
+  t= 18.50s | max|dT/dt|=8.86e-01 K/s | T_f= 79.8°C | T_p= 43.4°C | T_a= 43.1°C
+         Balance: Q_in=63.8W, Error=40.01%
+  t= 18.60s | max|dT/dt|=8.84e-01 K/s | T_f= 79.8°C | T_p= 43.5°C | T_a= 43.2°C
+         Balance: Q_in=63.6W, Error=40.01%
+  t= 18.70s | max|dT/dt|=8.82e-01 K/s | T_f= 79.8°C | T_p= 43.6°C | T_a= 43.3°C
+         Balance: Q_in=63.5W, Error=40.02%
+  t= 18.80s | max|dT/dt|=8.79e-01 K/s | T_f= 79.8°C | T_p= 43.7°C | T_a= 43.4°C
+         Balance: Q_in=63.3W, Error=40.02%
+  t= 18.90s | max|dT/dt|=8.77e-01 K/s | T_f= 79.8°C | T_p= 43.8°C | T_a= 43.5°C
+         Balance: Q_in=63.2W, Error=40.03%
+  t= 19.00s | max|dT/dt|=8.75e-01 K/s | T_f= 79.8°C | T_p= 43.8°C | T_a= 43.6°C
+         Balance: Q_in=63.0W, Error=40.04%
+  t= 19.10s | max|dT/dt|=8.73e-01 K/s | T_f= 79.8°C | T_p= 43.9°C | T_a= 43.7°C
+         Balance: Q_in=62.9W, Error=40.04%
+  t= 19.20s | max|dT/dt|=8.71e-01 K/s | T_f= 79.8°C | T_p= 44.0°C | T_a= 43.7°C
+         Balance: Q_in=62.7W, Error=40.05%
+  t= 19.30s | max|dT/dt|=8.69e-01 K/s | T_f= 79.8°C | T_p= 44.1°C | T_a= 43.8°C
+         Balance: Q_in=62.6W, Error=40.05%
+  t= 19.40s | max|dT/dt|=8.66e-01 K/s | T_f= 79.8°C | T_p= 44.2°C | T_a= 43.9°C
+         Balance: Q_in=62.4W, Error=40.06%
+  t= 19.50s | max|dT/dt|=8.64e-01 K/s | T_f= 79.8°C | T_p= 44.3°C | T_a= 44.0°C
+         Balance: Q_in=62.3W, Error=40.06%
+  t= 19.60s | max|dT/dt|=8.62e-01 K/s | T_f= 79.8°C | T_p= 44.4°C | T_a= 44.1°C
+         Balance: Q_in=62.1W, Error=40.07%
+  t= 19.70s | max|dT/dt|=8.60e-01 K/s | T_f= 79.8°C | T_p= 44.4°C | T_a= 44.2°C
+         Balance: Q_in=62.0W, Error=40.08%
+  t= 19.80s | max|dT/dt|=8.58e-01 K/s | T_f= 79.8°C | T_p= 44.5°C | T_a= 44.3°C
+         Balance: Q_in=61.8W, Error=40.08%
+  t= 19.90s | max|dT/dt|=8.56e-01 K/s | T_f= 79.8°C | T_p= 44.6°C | T_a= 44.3°C
+         Balance: Q_in=61.7W, Error=40.09%
+  t= 20.00s | max|dT/dt|=8.54e-01 K/s | T_f= 79.8°C | T_p= 44.7°C | T_a= 44.4°C
+         Balance: Q_in=61.5W, Error=40.09%
+  t= 20.10s | max|dT/dt|=8.52e-01 K/s | T_f= 79.8°C | T_p= 44.8°C | T_a= 44.5°C
+         Balance: Q_in=61.4W, Error=40.10%
+  t= 20.20s | max|dT/dt|=8.50e-01 K/s | T_f= 79.8°C | T_p= 44.9°C | T_a= 44.6°C
+         Balance: Q_in=61.2W, Error=40.11%
+  t= 20.30s | max|dT/dt|=8.47e-01 K/s | T_f= 79.8°C | T_p= 45.0°C | T_a= 44.7°C
+         Balance: Q_in=61.1W, Error=40.11%
+  t= 20.40s | max|dT/dt|=8.45e-01 K/s | T_f= 79.8°C | T_p= 45.0°C | T_a= 44.8°C
+         Balance: Q_in=60.9W, Error=40.12%
+  t= 20.50s | max|dT/dt|=8.43e-01 K/s | T_f= 79.8°C | T_p= 45.1°C | T_a= 44.9°C
+         Balance: Q_in=60.8W, Error=40.12%
+  t= 20.60s | max|dT/dt|=8.41e-01 K/s | T_f= 79.8°C | T_p= 45.2°C | T_a= 44.9°C
+         Balance: Q_in=60.6W, Error=40.13%
+  t= 20.70s | max|dT/dt|=8.39e-01 K/s | T_f= 79.8°C | T_p= 45.3°C | T_a= 45.0°C
+         Balance: Q_in=60.5W, Error=40.14%
+  t= 20.80s | max|dT/dt|=8.37e-01 K/s | T_f= 79.8°C | T_p= 45.4°C | T_a= 45.1°C
+         Balance: Q_in=60.4W, Error=40.14%
+  t= 20.90s | max|dT/dt|=8.35e-01 K/s | T_f= 79.8°C | T_p= 45.5°C | T_a= 45.2°C
+         Balance: Q_in=60.2W, Error=40.15%
+  t= 21.00s | max|dT/dt|=8.33e-01 K/s | T_f= 79.8°C | T_p= 45.5°C | T_a= 45.3°C
+         Balance: Q_in=60.1W, Error=40.15%
+  t= 21.10s | max|dT/dt|=8.31e-01 K/s | T_f= 79.8°C | T_p= 45.6°C | T_a= 45.4°C
+         Balance: Q_in=59.9W, Error=40.16%
+  t= 21.20s | max|dT/dt|=8.29e-01 K/s | T_f= 79.8°C | T_p= 45.7°C | T_a= 45.4°C
+         Balance: Q_in=59.8W, Error=40.17%
+  t= 21.30s | max|dT/dt|=8.27e-01 K/s | T_f= 79.8°C | T_p= 45.8°C | T_a= 45.5°C
+         Balance: Q_in=59.6W, Error=40.17%
+  t= 21.40s | max|dT/dt|=8.25e-01 K/s | T_f= 79.8°C | T_p= 45.9°C | T_a= 45.6°C
+         Balance: Q_in=59.5W, Error=40.18%
+  t= 21.50s | max|dT/dt|=8.23e-01 K/s | T_f= 79.8°C | T_p= 46.0°C | T_a= 45.7°C
+         Balance: Q_in=59.3W, Error=40.18%
+  t= 21.60s | max|dT/dt|=8.21e-01 K/s | T_f= 79.8°C | T_p= 46.0°C | T_a= 45.8°C
+         Balance: Q_in=59.2W, Error=40.19%
+  t= 21.70s | max|dT/dt|=8.19e-01 K/s | T_f= 79.8°C | T_p= 46.1°C | T_a= 45.8°C
+         Balance: Q_in=59.1W, Error=40.20%
+  t= 21.80s | max|dT/dt|=8.17e-01 K/s | T_f= 79.8°C | T_p= 46.2°C | T_a= 45.9°C
+         Balance: Q_in=58.9W, Error=40.20%
+  t= 21.90s | max|dT/dt|=8.15e-01 K/s | T_f= 79.8°C | T_p= 46.3°C | T_a= 46.0°C
+         Balance: Q_in=58.8W, Error=40.21%
+  t= 22.00s | max|dT/dt|=8.13e-01 K/s | T_f= 79.8°C | T_p= 46.4°C | T_a= 46.1°C
+         Balance: Q_in=58.6W, Error=40.21%
+  t= 22.10s | max|dT/dt|=8.11e-01 K/s | T_f= 79.8°C | T_p= 46.4°C | T_a= 46.2°C
+         Balance: Q_in=58.5W, Error=40.22%
+  t= 22.20s | max|dT/dt|=8.09e-01 K/s | T_f= 79.8°C | T_p= 46.5°C | T_a= 46.3°C
+         Balance: Q_in=58.4W, Error=40.23%
+  t= 22.30s | max|dT/dt|=8.07e-01 K/s | T_f= 79.8°C | T_p= 46.6°C | T_a= 46.3°C
+         Balance: Q_in=58.2W, Error=40.23%
+  t= 22.40s | max|dT/dt|=8.05e-01 K/s | T_f= 79.8°C | T_p= 46.7°C | T_a= 46.4°C
+         Balance: Q_in=58.1W, Error=40.24%
+  t= 22.50s | max|dT/dt|=8.03e-01 K/s | T_f= 79.8°C | T_p= 46.8°C | T_a= 46.5°C
+         Balance: Q_in=57.9W, Error=40.25%
+  t= 22.60s | max|dT/dt|=8.01e-01 K/s | T_f= 79.8°C | T_p= 46.8°C | T_a= 46.6°C
+         Balance: Q_in=57.8W, Error=40.25%
+  t= 22.70s | max|dT/dt|=7.99e-01 K/s | T_f= 79.8°C | T_p= 46.9°C | T_a= 46.7°C
+         Balance: Q_in=57.7W, Error=40.26%
+  t= 22.80s | max|dT/dt|=7.97e-01 K/s | T_f= 79.8°C | T_p= 47.0°C | T_a= 46.7°C
+         Balance: Q_in=57.5W, Error=40.27%
+  t= 22.90s | max|dT/dt|=7.95e-01 K/s | T_f= 79.8°C | T_p= 47.1°C | T_a= 46.8°C
+         Balance: Q_in=57.4W, Error=40.27%
+  t= 23.00s | max|dT/dt|=7.93e-01 K/s | T_f= 79.8°C | T_p= 47.2°C | T_a= 46.9°C
+         Balance: Q_in=57.3W, Error=40.28%
+  t= 23.10s | max|dT/dt|=7.91e-01 K/s | T_f= 79.8°C | T_p= 47.2°C | T_a= 47.0°C
+         Balance: Q_in=57.1W, Error=40.28%
+  t= 23.20s | max|dT/dt|=7.89e-01 K/s | T_f= 79.8°C | T_p= 47.3°C | T_a= 47.1°C
+         Balance: Q_in=57.0W, Error=40.29%
+  t= 23.30s | max|dT/dt|=7.87e-01 K/s | T_f= 79.8°C | T_p= 47.4°C | T_a= 47.1°C
+         Balance: Q_in=56.8W, Error=40.30%
+  t= 23.40s | max|dT/dt|=7.85e-01 K/s | T_f= 79.8°C | T_p= 47.5°C | T_a= 47.2°C
+         Balance: Q_in=56.7W, Error=40.30%
+  t= 23.50s | max|dT/dt|=7.83e-01 K/s | T_f= 79.8°C | T_p= 47.5°C | T_a= 47.3°C
+         Balance: Q_in=56.6W, Error=40.31%
+  t= 23.60s | max|dT/dt|=7.81e-01 K/s | T_f= 79.8°C | T_p= 47.6°C | T_a= 47.4°C
+         Balance: Q_in=56.4W, Error=40.32%
+  t= 23.70s | max|dT/dt|=7.79e-01 K/s | T_f= 79.8°C | T_p= 47.7°C | T_a= 47.4°C
+         Balance: Q_in=56.3W, Error=40.32%
+  t= 23.80s | max|dT/dt|=7.77e-01 K/s | T_f= 79.8°C | T_p= 47.8°C | T_a= 47.5°C
+         Balance: Q_in=56.2W, Error=40.33%
+  t= 23.90s | max|dT/dt|=7.76e-01 K/s | T_f= 79.8°C | T_p= 47.9°C | T_a= 47.6°C
+         Balance: Q_in=56.0W, Error=40.34%
+  t= 24.00s | max|dT/dt|=7.74e-01 K/s | T_f= 79.8°C | T_p= 47.9°C | T_a= 47.7°C
+         Balance: Q_in=55.9W, Error=40.34%
+  t= 24.10s | max|dT/dt|=7.72e-01 K/s | T_f= 79.8°C | T_p= 48.0°C | T_a= 47.8°C
+         Balance: Q_in=55.8W, Error=40.35%
+  t= 24.20s | max|dT/dt|=7.70e-01 K/s | T_f= 79.8°C | T_p= 48.1°C | T_a= 47.8°C
+         Balance: Q_in=55.6W, Error=40.35%
+  t= 24.30s | max|dT/dt|=7.68e-01 K/s | T_f= 79.8°C | T_p= 48.2°C | T_a= 47.9°C
+         Balance: Q_in=55.5W, Error=40.36%
+  t= 24.40s | max|dT/dt|=7.66e-01 K/s | T_f= 79.8°C | T_p= 48.2°C | T_a= 48.0°C
+         Balance: Q_in=55.4W, Error=40.37%
+  t= 24.50s | max|dT/dt|=7.64e-01 K/s | T_f= 79.8°C | T_p= 48.3°C | T_a= 48.1°C
+         Balance: Q_in=55.2W, Error=40.37%
+  t= 24.60s | max|dT/dt|=7.62e-01 K/s | T_f= 79.8°C | T_p= 48.4°C | T_a= 48.1°C
+         Balance: Q_in=55.1W, Error=40.38%
+  t= 24.70s | max|dT/dt|=7.60e-01 K/s | T_f= 79.8°C | T_p= 48.5°C | T_a= 48.2°C
+         Balance: Q_in=55.0W, Error=40.39%
+  t= 24.80s | max|dT/dt|=7.58e-01 K/s | T_f= 79.8°C | T_p= 48.5°C | T_a= 48.3°C
+         Balance: Q_in=54.8W, Error=40.39%
+  t= 24.90s | max|dT/dt|=7.57e-01 K/s | T_f= 79.8°C | T_p= 48.6°C | T_a= 48.4°C
+         Balance: Q_in=54.7W, Error=40.40%
+  t= 25.00s | max|dT/dt|=7.55e-01 K/s | T_f= 79.8°C | T_p= 48.7°C | T_a= 48.4°C
+         Balance: Q_in=54.6W, Error=40.41%
+  t= 25.10s | max|dT/dt|=7.53e-01 K/s | T_f= 79.8°C | T_p= 48.8°C | T_a= 48.5°C
+         Balance: Q_in=54.4W, Error=40.41%
+  t= 25.20s | max|dT/dt|=7.51e-01 K/s | T_f= 79.8°C | T_p= 48.8°C | T_a= 48.6°C
+         Balance: Q_in=54.3W, Error=40.42%
+  t= 25.30s | max|dT/dt|=7.49e-01 K/s | T_f= 79.8°C | T_p= 48.9°C | T_a= 48.7°C
+         Balance: Q_in=54.2W, Error=40.43%
+  t= 25.40s | max|dT/dt|=7.47e-01 K/s | T_f= 79.8°C | T_p= 49.0°C | T_a= 48.7°C
+         Balance: Q_in=54.1W, Error=40.43%
+  t= 25.50s | max|dT/dt|=7.46e-01 K/s | T_f= 79.8°C | T_p= 49.1°C | T_a= 48.8°C
+         Balance: Q_in=53.9W, Error=40.44%
+  t= 25.60s | max|dT/dt|=7.44e-01 K/s | T_f= 79.8°C | T_p= 49.1°C | T_a= 48.9°C
+         Balance: Q_in=53.8W, Error=40.45%
+  t= 25.70s | max|dT/dt|=7.42e-01 K/s | T_f= 79.8°C | T_p= 49.2°C | T_a= 49.0°C
+         Balance: Q_in=53.7W, Error=40.45%
+  t= 25.80s | max|dT/dt|=7.40e-01 K/s | T_f= 79.8°C | T_p= 49.3°C | T_a= 49.0°C
+         Balance: Q_in=53.5W, Error=40.46%
+  t= 25.90s | max|dT/dt|=7.38e-01 K/s | T_f= 79.8°C | T_p= 49.4°C | T_a= 49.1°C
+         Balance: Q_in=53.4W, Error=40.47%
+  t= 26.00s | max|dT/dt|=7.36e-01 K/s | T_f= 79.8°C | T_p= 49.4°C | T_a= 49.2°C
+         Balance: Q_in=53.3W, Error=40.47%
+  t= 26.10s | max|dT/dt|=7.35e-01 K/s | T_f= 79.8°C | T_p= 49.5°C | T_a= 49.3°C
+         Balance: Q_in=53.2W, Error=40.48%
+  t= 26.20s | max|dT/dt|=7.33e-01 K/s | T_f= 79.8°C | T_p= 49.6°C | T_a= 49.3°C
+         Balance: Q_in=53.0W, Error=40.49%
+  t= 26.30s | max|dT/dt|=7.31e-01 K/s | T_f= 79.8°C | T_p= 49.6°C | T_a= 49.4°C
+         Balance: Q_in=52.9W, Error=40.50%
+  t= 26.40s | max|dT/dt|=7.29e-01 K/s | T_f= 79.8°C | T_p= 49.7°C | T_a= 49.5°C
+         Balance: Q_in=52.8W, Error=40.50%
+  t= 26.50s | max|dT/dt|=7.27e-01 K/s | T_f= 79.8°C | T_p= 49.8°C | T_a= 49.5°C
+         Balance: Q_in=52.7W, Error=40.51%
+  t= 26.60s | max|dT/dt|=7.26e-01 K/s | T_f= 79.8°C | T_p= 49.9°C | T_a= 49.6°C
+         Balance: Q_in=52.5W, Error=40.52%
+  t= 26.70s | max|dT/dt|=7.24e-01 K/s | T_f= 79.8°C | T_p= 49.9°C | T_a= 49.7°C
+         Balance: Q_in=52.4W, Error=40.52%
+  t= 26.80s | max|dT/dt|=7.22e-01 K/s | T_f= 79.8°C | T_p= 50.0°C | T_a= 49.8°C
+         Balance: Q_in=52.3W, Error=40.53%
+  t= 26.90s | max|dT/dt|=7.20e-01 K/s | T_f= 79.8°C | T_p= 50.1°C | T_a= 49.8°C
+         Balance: Q_in=52.2W, Error=40.54%
+  t= 27.00s | max|dT/dt|=7.18e-01 K/s | T_f= 79.8°C | T_p= 50.1°C | T_a= 49.9°C
+         Balance: Q_in=52.0W, Error=40.54%
+  t= 27.10s | max|dT/dt|=7.17e-01 K/s | T_f= 79.8°C | T_p= 50.2°C | T_a= 50.0°C
+         Balance: Q_in=51.9W, Error=40.55%
+  t= 27.20s | max|dT/dt|=7.15e-01 K/s | T_f= 79.8°C | T_p= 50.3°C | T_a= 50.1°C
+         Balance: Q_in=51.8W, Error=40.56%
+  t= 27.30s | max|dT/dt|=7.13e-01 K/s | T_f= 79.8°C | T_p= 50.4°C | T_a= 50.1°C
+         Balance: Q_in=51.7W, Error=40.56%
+  t= 27.40s | max|dT/dt|=7.11e-01 K/s | T_f= 79.8°C | T_p= 50.4°C | T_a= 50.2°C
+         Balance: Q_in=51.5W, Error=40.57%
+  t= 27.50s | max|dT/dt|=7.10e-01 K/s | T_f= 79.8°C | T_p= 50.5°C | T_a= 50.3°C
+         Balance: Q_in=51.4W, Error=40.58%
+  t= 27.60s | max|dT/dt|=7.08e-01 K/s | T_f= 79.8°C | T_p= 50.6°C | T_a= 50.3°C
+         Balance: Q_in=51.3W, Error=40.59%
+  t= 27.70s | max|dT/dt|=7.06e-01 K/s | T_f= 79.8°C | T_p= 50.6°C | T_a= 50.4°C
+         Balance: Q_in=51.2W, Error=40.59%
+  t= 27.80s | max|dT/dt|=7.04e-01 K/s | T_f= 79.8°C | T_p= 50.7°C | T_a= 50.5°C
+         Balance: Q_in=51.0W, Error=40.60%
+  t= 27.90s | max|dT/dt|=7.03e-01 K/s | T_f= 79.8°C | T_p= 50.8°C | T_a= 50.5°C
+         Balance: Q_in=50.9W, Error=40.61%
+  t= 28.00s | max|dT/dt|=7.01e-01 K/s | T_f= 79.8°C | T_p= 50.8°C | T_a= 50.6°C
+         Balance: Q_in=50.8W, Error=40.61%
+  t= 28.10s | max|dT/dt|=6.99e-01 K/s | T_f= 79.8°C | T_p= 50.9°C | T_a= 50.7°C
+         Balance: Q_in=50.7W, Error=40.62%
+  t= 28.20s | max|dT/dt|=6.98e-01 K/s | T_f= 79.8°C | T_p= 51.0°C | T_a= 50.8°C
+         Balance: Q_in=50.6W, Error=40.63%
+  t= 28.30s | max|dT/dt|=6.96e-01 K/s | T_f= 79.8°C | T_p= 51.1°C | T_a= 50.8°C
+         Balance: Q_in=50.4W, Error=40.64%
+  t= 28.40s | max|dT/dt|=6.94e-01 K/s | T_f= 79.8°C | T_p= 51.1°C | T_a= 50.9°C
+         Balance: Q_in=50.3W, Error=40.64%
+  t= 28.50s | max|dT/dt|=6.92e-01 K/s | T_f= 79.8°C | T_p= 51.2°C | T_a= 51.0°C
+         Balance: Q_in=50.2W, Error=40.65%
+  t= 28.60s | max|dT/dt|=6.91e-01 K/s | T_f= 79.8°C | T_p= 51.3°C | T_a= 51.0°C
+         Balance: Q_in=50.1W, Error=40.66%
+  t= 28.70s | max|dT/dt|=6.89e-01 K/s | T_f= 79.8°C | T_p= 51.3°C | T_a= 51.1°C
+         Balance: Q_in=50.0W, Error=40.66%
+  t= 28.80s | max|dT/dt|=6.87e-01 K/s | T_f= 79.8°C | T_p= 51.4°C | T_a= 51.2°C
+         Balance: Q_in=49.8W, Error=40.67%
+  t= 28.90s | max|dT/dt|=6.86e-01 K/s | T_f= 79.8°C | T_p= 51.5°C | T_a= 51.2°C
+         Balance: Q_in=49.7W, Error=40.68%
+  t= 29.00s | max|dT/dt|=6.84e-01 K/s | T_f= 79.8°C | T_p= 51.5°C | T_a= 51.3°C
+         Balance: Q_in=49.6W, Error=40.69%
+  t= 29.10s | max|dT/dt|=6.82e-01 K/s | T_f= 79.8°C | T_p= 51.6°C | T_a= 51.4°C
+         Balance: Q_in=49.5W, Error=40.69%
+  t= 29.20s | max|dT/dt|=6.81e-01 K/s | T_f= 79.8°C | T_p= 51.7°C | T_a= 51.4°C
+         Balance: Q_in=49.4W, Error=40.70%
+  t= 29.30s | max|dT/dt|=6.79e-01 K/s | T_f= 79.8°C | T_p= 51.7°C | T_a= 51.5°C
+         Balance: Q_in=49.3W, Error=40.71%
+  t= 29.40s | max|dT/dt|=6.77e-01 K/s | T_f= 79.8°C | T_p= 51.8°C | T_a= 51.6°C
+         Balance: Q_in=49.1W, Error=40.72%
+  t= 29.50s | max|dT/dt|=6.76e-01 K/s | T_f= 79.8°C | T_p= 51.9°C | T_a= 51.6°C
+         Balance: Q_in=49.0W, Error=40.72%
+  t= 29.60s | max|dT/dt|=6.74e-01 K/s | T_f= 79.8°C | T_p= 51.9°C | T_a= 51.7°C
+         Balance: Q_in=48.9W, Error=40.73%
+  t= 29.70s | max|dT/dt|=6.72e-01 K/s | T_f= 79.8°C | T_p= 52.0°C | T_a= 51.8°C
+         Balance: Q_in=48.8W, Error=40.74%
+  t= 29.80s | max|dT/dt|=6.71e-01 K/s | T_f= 79.8°C | T_p= 52.1°C | T_a= 51.9°C
+         Balance: Q_in=48.7W, Error=40.75%
+  t= 29.90s | max|dT/dt|=6.69e-01 K/s | T_f= 79.8°C | T_p= 52.1°C | T_a= 51.9°C
+         Balance: Q_in=48.6W, Error=40.75%
+  t= 30.00s | max|dT/dt|=6.67e-01 K/s | T_f= 79.8°C | T_p= 52.2°C | T_a= 52.0°C
+         Balance: Q_in=48.6W, Error=40.75%
+
+📊 PASO 5: Preparando resultados...
+  Guardando resultados a disco...
+  ✅ Guardado en: resultados/datos/resultados_Aluminio.npz
+
+
+======================================================================
+✅ SIMULACIÓN COMPLETADA
+======================================================================
+
+📊 Resumen:
+  Tiempo simulado: 30.00 s
+  Puntos guardados: 302
+  Convergencia: NO
+
+🌡️  Temperaturas finales:
+  Fluido: entrada=80.0°C, salida=79.6°C
+  Placa: agua=52.5°C, aire=52.0°C
+  Aletas:
+    Aleta 1: 52.0°C
+    Aleta 2: 52.0°C
+    Aleta 3: 52.0°C
+
+======================================================================

@@ -56,14 +56,16 @@ def extraer_temperatura_superficie_placa(
     assert not np.isnan(T_placa).any(), "T_placa contiene NaN"
     assert not np.isinf(T_placa).any(), "T_placa contiene Inf"
     
-    Ny_placa = params.Ny_placa
     Nx_placa = params.Nx_placa
+    Ny_placa = params.Ny_placa
     
-    assert T_placa.shape == (Ny_placa, Nx_placa), \
-        f"Shape incorrecto: {T_placa.shape} != ({Ny_placa}, {Nx_placa})"
+    # T_placa tiene shape (Nx, Ny) según placa.py
+    assert T_placa.shape == (Nx_placa, Ny_placa), \
+        f"Shape incorrecto: {T_placa.shape} != ({Nx_placa}, {Ny_placa})"
     
-    # Extraer primera fila (j=0, superficie en contacto con agua)
-    T_superficie = T_placa[0, :].copy()
+    # Extraer primera columna (j=0, superficie en contacto con agua)
+    # T_placa[i, 0] es la temperatura en (x_i, y=0)
+    T_superficie = T_placa[:, 0].copy()
     
     # Validaciones de salida
     assert T_superficie.shape == (Nx_placa,), \
@@ -264,17 +266,17 @@ def interpolar_temperatura_placa_2d(
         f"y_objetivo fuera de rango [{y_min}, {y_max}]: [{y_objetivo.min()}, {y_objetivo.max()}]"
     
     # Crear interpolador bilineal
-    # Nota: RegularGridInterpolator espera (y, x) para arrays 2D indexados como [y, x]
+    # Nota: T_placa tiene shape (Nx, Ny), por lo que el orden es (x, y)
     interpolador = RegularGridInterpolator(
-        (y_placa_unique, x_placa_unique),
+        (x_placa_unique, y_placa_unique),
         T_placa,
         method='linear',
         bounds_error=True,
         fill_value=None
     )
     
-    # Preparar puntos para interpolación (formato: [[y1, x1], [y2, x2], ...])
-    puntos = np.column_stack([y_objetivo, x_objetivo])
+    # Preparar puntos para interpolación (formato: [[x1, y1], [x2, y2], ...])
+    puntos = np.column_stack([x_objetivo, y_objetivo])
     
     # Interpolar
     T_interpolada = interpolador(puntos)

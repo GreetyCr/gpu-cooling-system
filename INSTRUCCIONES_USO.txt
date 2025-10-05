@@ -1,0 +1,443 @@
+================================================================================
+INSTRUCCIONES DE USO - SIMULADOR DE ENFRIAMIENTO GPU
+Sistema de Transferencia de Calor con Aletas Cilíndricas
+================================================================================
+
+CONTENIDO:
+  1. Requisitos previos
+  2. Ejecución en Terminal
+  3. Ejecución en Jupyter Notebook
+  4. Ejecución en Spyder
+  5. Interfaz Web (Streamlit)
+  6. Interpretación de resultados
+  7. Solución de problemas
+
+================================================================================
+1. REQUISITOS PREVIOS
+================================================================================
+
+Antes de ejecutar el simulador, asegúrate de tener instaladas las dependencias:
+
+  cd /Users/randallbonilla/Desktop/python-adrian
+  pip install -r requirements.txt
+
+Paquetes necesarios:
+  - numpy
+  - scipy
+  - matplotlib
+  - streamlit (opcional, solo para interfaz web)
+
+================================================================================
+2. EJECUCIÓN EN TERMINAL
+================================================================================
+
+2.1. MÉTODO DIRECTO (Recomendado)
+----------------------------------
+
+Navega al directorio del proyecto y ejecuta:
+
+  cd /Users/randallbonilla/Desktop/python-adrian
+  python3 test_solucionador.py
+
+Verás el progreso en tiempo real con actualizaciones cada 200 pasos.
+
+2.2. CON REDIRECCIÓN A ARCHIVO LOG
+-----------------------------------
+
+Para guardar la salida en un archivo:
+
+  python3 test_solucionador.py > simulacion_log.txt 2>&1
+
+Para ver y guardar simultáneamente:
+
+  python3 test_solucionador.py 2>&1 | tee simulacion_log.txt
+
+2.3. EN SEGUNDO PLANO (Background)
+-----------------------------------
+
+Para ejecutar sin bloquear la terminal:
+
+  nohup python3 test_solucionador.py > output.log 2>&1 &
+
+Para ver el progreso:
+
+  tail -f output.log
+
+Para detener el proceso:
+
+  pkill -f test_solucionador
+
+2.4. PARÁMETROS PERSONALIZABLES
+--------------------------------
+
+Puedes modificar el archivo test_solucionador.py (líneas 35-43):
+
+  - t_max: Tiempo máximo de simulación (por defecto 30.0 s)
+  - epsilon: Criterio de convergencia (por defecto 1e-3 K/s)
+  - guardar_cada: Frecuencia de guardado (por defecto 200 pasos)
+  - calcular_balance: Activar balance energético (True/False)
+
+Ejemplo de modificación:
+
+  # Simulación más rápida (10 segundos)
+  resultados = resolver_sistema(
+      params=params,
+      mallas=mallas,
+      t_max=10.0,          # <-- Cambiar aquí
+      epsilon=1e-3,
+      guardar_cada=100,    # <-- Guardar más frecuentemente
+      calcular_balance=True,
+      verbose=True
+  )
+
+================================================================================
+3. EJECUCIÓN EN JUPYTER NOTEBOOK
+================================================================================
+
+3.1. CREAR UN NOTEBOOK
+-----------------------
+
+1. Abre Jupyter Notebook o JupyterLab:
+
+   jupyter notebook
+
+2. Navega a: /Users/randallbonilla/Desktop/python-adrian
+
+3. Crea un nuevo notebook: New > Python 3
+
+3.2. CÓDIGO PARA EJECUTAR EN JUPYTER
+-------------------------------------
+
+Copia y pega en celdas separadas:
+
+# CELDA 1: Imports y setup
+import sys
+sys.path.insert(0, '/Users/randallbonilla/Desktop/python-adrian')
+
+from src.parametros import Parametros
+from src.mallas import generar_todas_mallas
+from src.solucionador import resolver_sistema
+import numpy as np
+import matplotlib.pyplot as plt
+
+# CELDA 2: Configurar parámetros
+print("🔧 Configurando simulación...")
+params = Parametros(material="Al")
+mallas = generar_todas_mallas(params)
+print("✅ Listo!")
+
+# CELDA 3: Ejecutar simulación (esto toma tiempo!)
+print("🚀 Ejecutando simulación...")
+resultados = resolver_sistema(
+    params=params,
+    mallas=mallas,
+    t_max=10.0,           # 10 segundos para prueba rápida
+    epsilon=1e-3,
+    guardar_cada=100,
+    calcular_balance=True,
+    verbose=True
+)
+print("✅ Simulación completada!")
+
+# CELDA 4: Análisis rápido
+tiempo = resultados['tiempo']
+T_fluido = resultados['T_fluido']
+T_placa = resultados['T_placa']
+
+print(f"Tiempo simulado: {tiempo[-1]:.2f} s")
+print(f"Puntos guardados: {len(tiempo)}")
+print(f"Convergencia: {resultados['convergencia']['alcanzada']}")
+
+# CELDA 5: Gráfico rápido
+plt.figure(figsize=(12, 4))
+
+# Temperatura promedio de cada dominio
+plt.subplot(1, 2, 1)
+T_f_mean = [T.mean() - 273.15 for T in T_fluido]
+T_p_mean = [T.mean() - 273.15 for T in T_placa]
+T_a_mean = [np.mean([Ta.mean() for Ta in Tas]) - 273.15 
+            for Tas in resultados['T_aletas']]
+
+plt.plot(tiempo, T_f_mean, 'b-', label='Fluido', linewidth=2)
+plt.plot(tiempo, T_p_mean, 'r-', label='Placa', linewidth=2)
+plt.plot(tiempo, T_a_mean, 'g-', label='Aletas', linewidth=2)
+plt.xlabel('Tiempo (s)')
+plt.ylabel('Temperatura (°C)')
+plt.title('Evolución Térmica')
+plt.legend()
+plt.grid(True, alpha=0.3)
+
+# Balance energético
+plt.subplot(1, 2, 2)
+if resultados['metricas']['balance']:
+    balance = resultados['metricas']['balance']
+    t_balance = [b['tiempo'] for b in balance]
+    Q_in = [b['Q_in'] for b in balance]
+    plt.plot(t_balance, Q_in, 'k-', linewidth=2)
+    plt.xlabel('Tiempo (s)')
+    plt.ylabel('Q_in (W)')
+    plt.title('Potencia de Entrada')
+    plt.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+3.3. ANÁLISIS AVANZADO EN JUPYTER
+----------------------------------
+
+# Campo de temperaturas de la placa (último instante)
+T_p_final = T_placa[-1]
+
+plt.figure(figsize=(10, 6))
+plt.imshow(T_p_final.T - 273.15, 
+           aspect='auto', 
+           origin='lower', 
+           cmap='hot',
+           extent=[0, params.L_x*1000, 0, params.L_y*1000])
+plt.colorbar(label='Temperatura (°C)')
+plt.xlabel('x (mm)')
+plt.ylabel('y (mm)')
+plt.title('Campo de Temperatura en la Placa (final)')
+plt.tight_layout()
+plt.show()
+
+================================================================================
+4. EJECUCIÓN EN SPYDER
+================================================================================
+
+4.1. ABRIR SPYDER
+-----------------
+
+1. Inicia Spyder desde terminal:
+
+   spyder
+
+2. O desde Anaconda Navigator (si lo usas)
+
+4.2. CONFIGURAR DIRECTORIO DE TRABAJO
+--------------------------------------
+
+En la consola de Spyder:
+
+  import os
+  os.chdir('/Users/randallbonilla/Desktop/python-adrian')
+  print(os.getcwd())  # Verificar
+
+4.3. EJECUTAR EL SCRIPT
+-----------------------
+
+OPCIÓN A: Ejecución completa del archivo
+
+  1. Abre test_solucionador.py en Spyder (File > Open)
+  2. Presiona F5 o Run > Run
+  3. El progreso aparecerá en la consola IPython
+
+OPCIÓN B: Ejecución línea por línea (debugging)
+
+  1. Abre test_solucionador.py
+  2. Coloca breakpoints haciendo clic a la izquierda del número de línea
+  3. Presiona Ctrl+F5 o Debug > Debug
+  4. Usa F10 (step over) o F11 (step into)
+
+OPCIÓN C: Ejecutar desde consola IPython
+
+En la consola de Spyder:
+
+  %run test_solucionador.py
+
+4.4. TIPS PARA SPYDER
+---------------------
+
+- Variable Explorer: Ver todas las variables en tiempo real
+- Plots: Los gráficos aparecen en el panel "Plots" (puedes hacerlos inline)
+- Console: Puedes interactuar con los resultados después de la ejecución
+- Editor: Syntax highlighting y autocompletado disponible
+
+Para hacer gráficos inline en Spyder:
+
+  Tools > Preferences > IPython console > Graphics > Backend: Inline
+
+================================================================================
+5. INTERFAZ WEB (STREAMLIT) - RECOMENDADO
+================================================================================
+
+5.1. INSTALACIÓN
+----------------
+
+  pip install streamlit
+
+5.2. LANZAR LA INTERFAZ WEB
+----------------------------
+
+  cd /Users/randallbonilla/Desktop/python-adrian
+  streamlit run interfaz_web.py
+
+Esto abrirá automáticamente tu navegador en http://localhost:8501
+
+5.3. USO DE LA INTERFAZ WEB
+----------------------------
+
+La interfaz incluye:
+
+  ✅ Panel de configuración interactivo
+     - Selección de material (Aluminio / Acero Inoxidable)
+     - Tiempo de simulación ajustable
+     - Criterio de convergencia
+  
+  ✅ Botón de inicio de simulación
+  
+  ✅ Barra de progreso en tiempo real
+  
+  ✅ Visualización de resultados:
+     - Gráficos de evolución térmica
+     - Campos de temperatura 2D
+     - Métricas del sistema
+  
+  ✅ Descarga de resultados en formato .npz
+
+5.4. DETENER LA INTERFAZ
+------------------------
+
+En la terminal donde ejecutaste streamlit, presiona:
+
+  Ctrl + C
+
+================================================================================
+6. INTERPRETACIÓN DE RESULTADOS
+================================================================================
+
+6.1. SALIDA EN TERMINAL
+-----------------------
+
+Durante la ejecución verás:
+
+  t=  5.00s | max|dT/dt|=1.24e+00 K/s | T_f= 29.3°C | T_p= 29.3°C | T_a= 29.0°C
+         Balance: Q_in=88.3W, Error=39.35%
+
+Interpretación:
+
+  - t: Tiempo actual de la simulación
+  - max|dT/dt|: Máxima tasa de cambio de temperatura (convergencia → 0)
+  - T_f: Temperatura promedio del fluido
+  - T_p: Temperatura promedio de la placa
+  - T_a: Temperatura promedio de las aletas
+  - Q_in: Potencia de entrada (calor del fluido)
+  - Error: Error del balance energético (aceptable <40% en transitorios)
+
+6.2. ARCHIVOS DE SALIDA
+------------------------
+
+Los resultados se guardan automáticamente en:
+
+  resultados/datos/resultados_<Material>.npz
+
+Para cargar los resultados:
+
+  import numpy as np
+  
+  data = np.load('resultados/datos/resultados_Aluminio.npz', allow_pickle=True)
+  
+  tiempo = data['tiempo']
+  T_fluido = data['T_fluido']
+  T_placa = data['T_placa']
+  T_aletas = data['T_aletas']
+  convergencia = data['convergencia'].item()
+  metricas = data['metricas'].item()
+
+6.3. CRITERIOS DE ÉXITO
+------------------------
+
+✅ Simulación exitosa si:
+
+  1. max|dT/dt| disminuye continuamente
+  2. T_fluido alcanza ~80°C rápidamente (<1s)
+  3. T_placa aumenta gradualmente
+  4. T_aletas sigue de cerca a T_placa
+  5. Balance energético: Error <40% (transitorio) o <10% (estacionario)
+  6. No aparecen temperaturas NaN o Inf
+
+⚠️ Revisar si:
+
+  1. max|dT/dt| no disminuye → aumentar t_max
+  2. Error balance >50% → revisar parámetros
+  3. Temperaturas negativas → error numérico
+  4. T_aletas >> T_placa → error de acoplamiento
+
+================================================================================
+7. SOLUCIÓN DE PROBLEMAS
+================================================================================
+
+PROBLEMA: "ModuleNotFoundError: No module named 'src'"
+SOLUCIÓN: 
+  - Verifica que estás en el directorio correcto
+  - Ejecuta: cd /Users/randallbonilla/Desktop/python-adrian
+  - O agrega: sys.path.insert(0, '/ruta/completa/al/proyecto')
+
+PROBLEMA: La simulación es muy lenta
+SOLUCIÓN:
+  - Reduce t_max a 10.0 segundos
+  - Aumenta guardar_cada a 500 o 1000
+  - Usa material="Al" (más rápido que "SS")
+  - Desactiva calcular_balance=False
+
+PROBLEMA: "KeyboardInterrupt" al intentar detener
+SOLUCIÓN:
+  - Es normal, simplemente presiona Ctrl+C de nuevo
+  - O usa: pkill -f test_solucionador
+
+PROBLEMA: Error "Memory Error"
+SOLUCIÓN:
+  - Reduce t_max
+  - Aumenta guardar_cada (guarda menos puntos)
+  - Cierra otros programas
+
+PROBLEMA: Resultados no físicos (temperaturas negativas/muy altas)
+SOLUCIÓN:
+  - Revisa que requirements.txt esté instalado correctamente
+  - Verifica versiones: python3 --version (debe ser >=3.8)
+  - Contacta al desarrollador si persiste
+
+PROBLEMA: No se crea el archivo .npz
+SOLUCIÓN:
+  - Verifica que el directorio resultados/datos/ existe
+  - Verifica permisos de escritura
+  - Ejecuta: mkdir -p resultados/datos
+
+PROBLEMA: La interfaz Streamlit no abre
+SOLUCIÓN:
+  - Verifica instalación: pip install streamlit
+  - Abre manualmente: http://localhost:8501
+  - Revisa el firewall si no carga
+
+================================================================================
+TIEMPOS ESTIMADOS DE EJECUCIÓN
+================================================================================
+
+Con configuración por defecto (Aluminio, 60,000 pasos):
+
+  t_max = 10.0 s  → ~2-3 minutos de ejecución
+  t_max = 30.0 s  → ~5-7 minutos de ejecución
+  t_max = 60.0 s  → ~10-15 minutos de ejecución
+
+El tiempo depende de:
+  - Velocidad del procesador
+  - Material (Al más rápido que SS)
+  - Frecuencia de guardado (guardar_cada)
+  - Balance energético (aumenta ~20% el tiempo)
+
+================================================================================
+CONTACTO Y SOPORTE
+================================================================================
+
+Proyecto: Sistema de Enfriamiento GPU con Aletas Cilíndricas
+Versión: 1.0
+Fecha: Octubre 2025
+
+Para reportar problemas o sugerencias:
+  - Revisa la documentación en contexto/
+  - Consulta worklog.md para historial de cambios
+  - Revisa docs/ para validaciones de solvers individuales
+
+================================================================================
+FIN DE INSTRUCCIONES
+================================================================================
