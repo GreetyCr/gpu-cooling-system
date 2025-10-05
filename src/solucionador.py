@@ -533,6 +533,8 @@ def resolver_sistema(params: Parametros,
                 T_fluido_old, T_placa_old, T_aletas_old,
                 params, mallas, dt_placa
             )
+            # Agregar el tiempo actual al balance
+            balance['tiempo'] = t
             metricas['balance'].append(balance)
         
         # ---------------------------------------------------------------------

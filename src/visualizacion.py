@@ -334,8 +334,27 @@ def graficar_campo_2d(
     assert tiempo_idx < len(resultados['tiempo']), "tiempo_idx fuera de rango"
     
     tiempo = resultados['tiempo'][tiempo_idx]
-    T_p = np.asarray(resultados['T_placa'][tiempo_idx], dtype=float) - 273.15  # °C
-    T_a = [np.asarray(T, dtype=float) - 273.15 for T in resultados['T_aletas'][tiempo_idx]]  # 3 aletas
+    
+    # Convertir a arrays numéricos (puede venir como object arrays desde .npz)
+    T_p_raw = resultados['T_placa'][tiempo_idx]
+    if T_p_raw.dtype == object:
+        # Convertir object array a float array
+        T_p = np.array([[float(x) for x in row] for row in T_p_raw], dtype=float) - 273.15
+    else:
+        T_p = np.asarray(T_p_raw, dtype=float) - 273.15
+    
+    T_a = []
+    for T_raw in resultados['T_aletas'][tiempo_idx]:
+        if T_raw.dtype == object:
+            # Convertir object array 2D a float array
+            T_converted = np.array([[float(x) for x in row] for row in T_raw], dtype=float) - 273.15
+        else:
+            T_converted = np.asarray(T_raw, dtype=float) - 273.15
+        T_a.append(T_converted)
+    
+    # Debug: verificar dimensiones
+    if T_p.ndim != 2:
+        raise ValueError(f"T_p debe ser 2D, pero tiene shape {T_p.shape}")
     
     # Crear figura
     fig = plt.figure(figsize=(16, 10))
@@ -348,13 +367,40 @@ def graficar_campo_2d(
     if mallas['placa']['x'].ndim == 2:
         x_p = mallas['placa']['x'] * 1000
         y_p = mallas['placa']['y'] * 1000
+        T_p_plot = T_p
     else:
         # Crear meshgrid si son 1D
         x_p_1d = mallas['placa']['x'] * 1000
         y_p_1d = mallas['placa']['y'] * 1000
-        x_p, y_p = np.meshgrid(x_p_1d, y_p_1d)
+        
+        # Verificar dimensiones y ajustar si es necesario
+        Nx_malla = len(x_p_1d)
+        Ny_malla = len(y_p_1d)
+        Nx_T, Ny_T = T_p.shape
+        
+        # Si las dimensiones no coinciden, ajustar la malla
+        if Nx_malla != Nx_T or Ny_malla != Ny_T:
+            # Usar solo los primeros Nx_T y Ny_T elementos de la malla
+            x_p_1d = x_p_1d[:Nx_T]
+            y_p_1d = y_p_1d[:Ny_T]
+            print(f"   ℹ️ Ajustando dimensiones: malla ({Nx_malla}, {Ny_malla}) → T ({Nx_T}, {Ny_T})")
+        
+        # meshgrid con indexing='ij' para que coincida con T_p (Nx, Ny)
+        x_p, y_p = np.meshgrid(x_p_1d, y_p_1d, indexing='ij')
+        T_p_plot = T_p
+        
+        # Verificar que coincidan las dimensiones finales
+        if x_p.shape != T_p_plot.shape:
+            raise ValueError(f"Dimensiones no coinciden: x_p {x_p.shape}, y_p {y_p.shape}, T_p {T_p_plot.shape}")
     
-    im1 = ax1.contourf(x_p, y_p, T_p.T, levels=20, cmap='hot')
+    try:
+        im1 = ax1.contourf(x_p, y_p, T_p_plot, levels=20, cmap='hot')
+    except ValueError as e:
+        print(f"   🐛 Error en contourf placa:")
+        print(f"      x_p.shape: {x_p.shape}")
+        print(f"      y_p.shape: {y_p.shape}")
+        print(f"      T_p_plot.shape: {T_p_plot.shape}")
+        raise
     cbar1 = plt.colorbar(im1, ax=ax1, label='Temperatura (°C)')
     ax1.set_xlabel('Posición x (mm)', fontweight='bold')
     ax1.set_ylabel('Posición y (mm)', fontweight='bold')
@@ -368,8 +414,23 @@ def graficar_campo_2d(
         r_a = mallas['aletas'][k]['r']
         theta_a = mallas['aletas'][k]['theta']
         
-        im = ax.contourf(theta_a, r_a * 1000, T_a[k], levels=15, cmap='hot')
-        cbar = plt.colorbar(im, ax=ax, label='T (°C)', pad=0.1)
+        try:
+            # T_a[k] puede venir como (N_theta, N_r) pero contourf espera (N_r, N_theta)
+            # Verificar y transponer si es necesario
+            if T_a[k].shape[0] == len(theta_a) and T_a[k].shape[1] == len(r_a):
+                T_plot = T_a[k].T  # Transponer para que coincida con (N_r, N_theta)
+            else:
+                T_plot = T_a[k]
+            
+            im = ax.contourf(theta_a, r_a * 1000, T_plot, levels=15, cmap='hot')
+            cbar = plt.colorbar(im, ax=ax, label='T (°C)', pad=0.1)
+        except (ValueError, TypeError) as e:
+            print(f"   🐛 Error en contourf aleta {k+1}:")
+            print(f"      theta_a.shape: {theta_a.shape}")
+            print(f"      r_a.shape: {r_a.shape}")
+            print(f"      T_a[{k}].shape: {T_a[k].shape}")
+            raise
+        
         ax.set_title(f'Aleta {k+1} - t={tiempo:.2f}s', fontsize=11, fontweight='bold')
         ax.set_theta_zero_location('E')
         ax.set_theta_direction(1)
@@ -431,7 +492,17 @@ def graficar_balance_energetico(
     balance = resultados['metricas']['balance']
     
     # Extraer datos
-    t_balance = np.array([b['tiempo'] for b in balance])
+    # Manejar balances con y sin tiempo (compatibilidad con resultados antiguos)
+    if len(balance) > 0 and 'tiempo' in balance[0]:
+        t_balance = np.array([b['tiempo'] for b in balance])
+    else:
+        # Si no hay tiempo en balance, usar tiempo de resultados con stride
+        tiempo_full = resultados['tiempo']
+        # Estimar índices asumiendo que balance se guardó cada N pasos
+        stride = max(1, len(tiempo_full) // len(balance))
+        indices = np.arange(0, len(tiempo_full), stride)[:len(balance)]
+        t_balance = tiempo_full[indices]
+    
     Q_in = np.array([b['Q_in'] for b in balance])
     Q_out = np.array([b['Q_out'] for b in balance])
     dE_dt = np.array([b['dE_dt'] for b in balance])
@@ -1073,6 +1144,8 @@ def generar_reporte_completo(
     except Exception as e:
         if verbose:
             print(f"   ⚠️ No se pudo generar campos 2D: {e}")
+            import traceback
+            traceback.print_exc()
     
     # 4. Balance energético (si está disponible)
     if 'metricas' in resultados and 'balance' in resultados['metricas'] and \
