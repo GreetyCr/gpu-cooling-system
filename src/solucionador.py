@@ -534,7 +534,7 @@ def resolver_sistema(params: Parametros,
                 params, mallas, dt_placa
             )
             # Agregar el tiempo actual al balance
-            balance['tiempo'] = t
+            balance['tiempo'] = t_actual
             metricas['balance'].append(balance)
         
         # ---------------------------------------------------------------------

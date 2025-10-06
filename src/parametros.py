@@ -191,10 +191,25 @@ class Parametros:
         self.dtheta_aleta = np.pi / (self.Ntheta_aleta - 1)  # ~0.165 rad
         
         # Paso de tiempo [s]
-        # Valor seleccionado según análisis de estabilidad en documento
-        # CFL = 0.109 < 1 ✓
-        # Fourier_Al = 0.27 < 0.5 ✓
-        self.dt = 5.0e-4  # 0.5 ms
+        # Calcular dinámicamente según material considerando TODOS los criterios:
+        # 1. Fourier para placa: Fo_x + Fo_y ≤ 0.5
+        # 2. CFL para fluido: u*dt/dx ≤ 1
+        # El dt final es el MÍNIMO de ambos
+        
+        # Criterio Fourier (placa)
+        Fo_total_inv = (1.0 / self.dx_placa**2) + (1.0 / self.dy_placa**2)
+        dt_max_fourier = 0.5 / (self.alpha_s * Fo_total_inv)
+        
+        # Criterio CFL (fluido)
+        dt_max_cfl = self.dx_fluido / self.u
+        
+        # Tomar el mínimo (más restrictivo) y usar 80% por seguridad
+        dt_max = min(dt_max_fourier, dt_max_cfl)
+        self.dt = 0.8 * dt_max
+        
+        # Validar que dt no sea demasiado pequeño ni grande
+        # Rango: 1 μs hasta 50 ms (cubre Al rápido hasta SS lento)
+        assert 1e-6 < self.dt < 5e-2, f"dt fuera de rango razonable: {self.dt:.2e} s"
         
         # Validaciones de discretización
         assert self.Nx_fluido > 1, "Nx_fluido debe ser > 1"
