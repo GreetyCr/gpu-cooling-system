@@ -20,30 +20,112 @@ Calcular el tiempo que tarda el sistema en llegar al estado estacionario despué
 
 ```
 python-adrian/
-├── src/                      # Código fuente principal
-│   ├── parametros.py         # Parámetros físicos y numéricos del sistema
-│   ├── mallas.py             # Generación de mallas para cada dominio
-│   ├── fluido.py             # Solver 1D para el flujo de agua
-│   ├── placa.py              # Solver 2D para la placa base
-│   ├── aletas.py             # Solver 2D cilíndrico para aletas
-│   └── acoplamiento.py       # Acoplamiento entre dominios
-├── contexto/                 # Documentación técnica del proyecto
+├── main.py                   # 🚀 Script principal (CLI + menú interactivo)
+├── interfaz_web.py           # 🌐 Interfaz web con Streamlit
+├── requirements.txt          # 📦 Dependencias del proyecto
+├── README.md                 # 📖 Este archivo
+│
+├── src/                      # 💻 Código fuente principal
+│   ├── parametros.py         # Parámetros físicos y numéricos
+│   ├── mallas.py             # Generación de mallas
+│   ├── fluido.py             # Solver 1D del fluido
+│   ├── placa.py              # Solver 2D de la placa
+│   ├── aletas.py             # Solver 2D cilíndrico de aletas
+│   ├── acoplamiento.py       # Acoplamiento entre dominios
+│   ├── solucionador.py       # Bucle temporal maestro
+│   └── visualizacion.py      # Funciones de graficación
+│
+├── contexto/                 # 📚 Documentación técnica del problema
+│   ├── 00_guia_implementacion.md
 │   ├── 01_contexto_proyecto.md
 │   ├── 02_parametros_sistema.md
 │   ├── 03_ecuaciones_gobernantes.md
 │   ├── 04_condiciones_frontera.md
 │   ├── 05_discretizacion_numerica.md
 │   └── 06_herramientas_desarrollo.md
-├── docs/                     # Documentación de validación
-│   ├── validacion_solver_placa.md
-│   └── validacion_solver_aletas.md
-├── tests/                    # Tests unitarios y de integración
-├── resultados/               # Resultados de simulaciones
-│   ├── datos/                # Archivos de datos generados
+│
+├── docs/                     # 📝 Documentación adicional
+│   ├── PLAN_ORGANIZACION.md  # Plan de organización del repo
+│   ├── adr/                  # Architecture Decision Records
+│   ├── analisis/             # 📊 Análisis e informes
+│   │   ├── ANALISIS_INGENIERIL_RESULTADOS.md
+│   │   ├── ENTREGABLES_PRESENTACION.md
+│   │   └── codigo_resumen_presentacion.py
+│   ├── guias/                # 📘 Guías de uso
+│   │   ├── INSTRUCCIONES_USO.txt
+│   │   ├── COMANDOS_STREAMLIT.txt
+│   │   └── README_INTERFAZ.md
+│   └── notas/                # 📋 Notas de desarrollo
+│       ├── ACTUALIZACION_PROGRESO.md
+│       ├── CORRECCION_ATRIBUTOS.md
+│       ├── DISTRIBUCION_ESPACIAL.md
+│       ├── RESUMEN_CONVERGENCIA.md
+│       ├── TEST_MAIN.md
+│       └── INSTRUCCIONES_VISUALIZACIONES_SS.md
+│
+├── scripts/                  # 🔧 Scripts auxiliares
+│   ├── simulacion/           # Scripts de simulación
+│   │   ├── simular_acero.py
+│   │   └── generar_grafico_convergencia.py
+│   ├── visualizacion/        # Scripts de visualización
+│   │   ├── generar_grafico_rapido.py
+│   │   ├── generar_visualizaciones_SS.py
+│   │   └── ejemplo_distribucion_espacial.py
+│   └── utilidades/           # Scripts de monitoreo
+│       ├── monitorear_convergencia.sh
+│       └── monitorear_simulacion_SS.sh
+│
+├── logs/                     # 📋 Logs de ejecución y desarrollo
+│   ├── worklog.md            # 📝 Registro completo de desarrollo
+│   ├── convergencia_output.log
+│   ├── simulacion_SS.log
+│   └── simulacion_log.txt
+│
+├── resultados/               # 📊 Resultados de simulaciones
+│   ├── datos/                # Archivos .npz generados
 │   └── figuras/              # Gráficos y visualizaciones
-├── requirements.txt          # Dependencias del proyecto
-└── worklog.md                # Registro detallado de desarrollo
+│
+├── tests/                    # ✅ Tests unitarios y de integración
+└── todo/                     # 📌 Tareas pendientes
+    └── instrucciones_ecuaciones.md
 ```
+
+## ⚡ Accesos Rápidos
+
+### 🎯 Puntos de Entrada Principales
+
+| Archivo | Descripción | Comando |
+|---------|-------------|---------|
+| `main.py` | Script principal con CLI y menú interactivo | `python3 main.py` |
+| `interfaz_web.py` | Interfaz web con Streamlit | `streamlit run interfaz_web.py` |
+
+### 📂 Archivos Importantes
+
+| Archivo | Ubicación | Descripción |
+|---------|-----------|-------------|
+| **Análisis de Resultados** | `docs/analisis/ANALISIS_INGENIERIL_RESULTADOS.md` | Interpretación completa de resultados Al vs SS |
+| **Código para Presentación** | `docs/analisis/codigo_resumen_presentacion.py` | Ecuaciones implementadas (ejecutable) |
+| **Guía de Entregables** | `docs/analisis/ENTREGABLES_PRESENTACION.md` | Estructura de presentación |
+| **Instrucciones de Uso** | `docs/guias/INSTRUCCIONES_USO.txt` | Guía completa (Terminal, Jupyter, Spyder) |
+| **Interfaz Web** | `docs/guias/README_INTERFAZ.md` | Guía de la interfaz Streamlit |
+| **Worklog Completo** | `logs/worklog.md` | Registro detallado de desarrollo |
+| **Plan de Organización** | `docs/PLAN_ORGANIZACION.md` | Estructura del repositorio |
+
+### 🔧 Scripts Útiles
+
+| Script | Ubicación | Propósito |
+|--------|-----------|-----------|
+| `simular_acero.py` | `scripts/simulacion/` | Simulación específica para Acero Inoxidable |
+| `generar_visualizaciones_SS.py` | `scripts/visualizacion/` | Generar todas las figuras de SS |
+| `ejemplo_distribucion_espacial.py` | `scripts/visualizacion/` | Ejemplo de distribución espacial completa |
+| `monitorear_simulacion_SS.sh` | `scripts/utilidades/` | Monitor de progreso en tiempo real |
+
+### 📊 Resultados Disponibles
+
+- **Datos**: `resultados/datos/*.npz` - Archivos binarios con temperaturas vs tiempo
+- **Figuras**: `resultados/figuras/*.png` - Gráficos generados (18 figuras: 9 Al + 9 SS)
+
+---
 
 ## 🚀 Instalación
 
@@ -56,7 +138,7 @@ python-adrian/
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/[tu-usuario]/gpu-cooling-system.git
+git clone https://github.com/GreetyCr/gpu-cooling-system.git
 cd gpu-cooling-system
 
 # Instalar dependencias
@@ -102,21 +184,63 @@ El proyecto implementa:
 
 ## 🎯 Uso
 
+### Modo 1: Script Principal (Recomendado)
+
+```bash
+# Menú interactivo
+python3 main.py
+
+# Simulación rápida (5 segundos)
+python3 main.py --rapido
+
+# Simulación completa (hasta convergencia)
+python3 main.py --completo
+
+# Solo generar visualizaciones de resultados existentes
+python3 main.py --solo-visualizacion
+
+# Comparar ambos materiales
+python3 main.py --comparar
+
+# Ver todas las opciones
+python3 main.py --help
+```
+
+### Modo 2: Interfaz Web
+
+```bash
+streamlit run interfaz_web.py
+```
+
+Luego abre tu navegador en `http://localhost:8501`
+
+### Modo 3: Programático (Python)
+
 ```python
-# Ejemplo básico de uso (en desarrollo)
 from src.parametros import Parametros
-from src.mallas import generar_mallas
-from src.solucionador import ejecutar_simulacion
+from src.mallas import generar_todas_mallas
+from src.solucionador import resolver_sistema
+from src.visualizacion import generar_reporte_completo
 
 # Inicializar parámetros
-params = Parametros(material='aluminio')
+params = Parametros(material='Al')
 
 # Generar mallas
-mallas = generar_mallas(params)
+mallas = generar_todas_mallas(params)
 
 # Ejecutar simulación
-resultados = ejecutar_simulacion(params, mallas)
+resultados, metricas = resolver_sistema(
+    params=params,
+    mallas=mallas,
+    t_max=60.0,
+    epsilon=1e-3
+)
+
+# Generar visualizaciones
+generar_reporte_completo(resultados, mallas, params)
 ```
+
+Para más detalles, consulta: `docs/guias/INSTRUCCIONES_USO.txt`
 
 ## 💻 Uso en Jupyter Notebook y Spyder
 
@@ -391,14 +515,38 @@ Los resultados de la simulación incluyen:
 
 ## 📝 Documentación
 
-La documentación técnica detallada se encuentra en la carpeta `/contexto/`:
+### Documentación Técnica del Problema (`contexto/`)
 
-- **Contexto del proyecto**: Descripción general y objetivos
-- **Parámetros del sistema**: Valores numéricos y propiedades
-- **Ecuaciones gobernantes**: Formulación matemática
-- **Condiciones de frontera**: BCs e interfaces
-- **Discretización numérica**: Esquemas implementados
-- **Herramientas de desarrollo**: Setup y workflow
+- `00_guia_implementacion.md` - Guía paso a paso de implementación
+- `01_contexto_proyecto.md` - Descripción general y objetivos
+- `02_parametros_sistema.md` - Valores numéricos y propiedades
+- `03_ecuaciones_gobernantes.md` - Formulación matemática
+- `04_condiciones_frontera.md` - Condiciones de frontera e interfaces
+- `05_discretizacion_numerica.md` - Esquemas numéricos implementados
+- `06_herramientas_desarrollo.md` - Setup y workflow de desarrollo
+
+### Documentación de Análisis (`docs/analisis/`)
+
+- `ANALISIS_INGENIERIL_RESULTADOS.md` - Interpretación completa de resultados (833 líneas)
+- `ENTREGABLES_PRESENTACION.md` - Guía para presentación en clase
+- `codigo_resumen_presentacion.py` - Código ejecutable con ecuaciones principales
+
+### Guías de Uso (`docs/guias/`)
+
+- `INSTRUCCIONES_USO.txt` - Manual completo (Terminal, Jupyter, Spyder)
+- `README_INTERFAZ.md` - Guía de la interfaz web Streamlit
+- `COMANDOS_STREAMLIT.txt` - Referencia rápida de comandos
+
+### Notas de Desarrollo (`docs/notas/`)
+
+- Actualizaciones de progreso, correcciones, y decisiones técnicas
+- Resumen de convergencia y testing
+- Instrucciones específicas para visualizaciones
+
+### Validación de Solvers (`docs/`)
+
+- `adr/` - Architecture Decision Records
+- Validaciones exhaustivas de `placa.py` y `aletas.py`
 
 ## 🧪 Testing
 
@@ -409,23 +557,43 @@ pytest tests/
 
 ## 📈 Estado del Proyecto
 
-**Estado actual**: En desarrollo activo
+**Estado actual**: ✅ **COMPLETO Y FUNCIONAL**
 
-Ver `worklog.md` para el registro detallado de progreso y decisiones técnicas.
+Ver `logs/worklog.md` para el registro detallado de progreso (~2,600 líneas) y decisiones técnicas.
 
-### Componentes Completados
-- ✅ Clase de parámetros
-- ✅ Generación de mallas
-- ✅ Solver del fluido (1D)
-- ✅ Solver de la placa (2D)
-- ✅ Solver de aletas (2D cilíndrico)
-- ✅ Sistema de acoplamiento térmico
+### ✅ Componentes Completados (100%)
 
-### Pendientes
-- 🔄 Bucle temporal completo
-- 🔄 Criterio de convergencia a estado estacionario
-- 🔄 Validación completa
-- 🔄 Optimización de rendimiento
+| Módulo | Estado | Descripción |
+|--------|--------|-------------|
+| `parametros.py` | ✅ | Clase completa con validaciones, 543 líneas |
+| `mallas.py` | ✅ | Generación 1D/2D cartesiano/cilíndrico, 458 líneas |
+| `fluido.py` | ✅ | Solver 1D advección-difusión, 270 líneas |
+| `placa.py` | ✅ | Solver 2D FTCS + Robin BCs, 373 líneas |
+| `aletas.py` | ✅ | Solver 2D cilíndrico + L'Hôpital r=0, 692 líneas |
+| `acoplamiento.py` | ✅ | Interpolación fluido-placa-aletas, 717 líneas |
+| `solucionador.py` | ✅ | Bucle temporal + convergencia, 650+ líneas |
+| `visualizacion.py` | ✅ | 9 funciones de graficación, 1,050+ líneas |
+| `main.py` | ✅ | CLI + menú interactivo, 850+ líneas |
+| `interfaz_web.py` | ✅ | Interfaz Streamlit, 450+ líneas |
+
+### 📊 Métricas del Proyecto
+
+- **Líneas de código fuente**: ~5,000 líneas
+- **Líneas de documentación**: ~3,500 líneas
+- **Total de archivos**: 50+ archivos
+- **Tiempo de desarrollo**: ~15 horas (registradas)
+- **Commits**: 10+ commits principales
+- **Tests ejecutados**: 100+ validaciones exitosas
+- **Simulaciones completadas**: Al (60s) + SS (60s)
+- **Figuras generadas**: 18 (9 Al + 9 SS)
+
+### 🎓 Entregables Académicos
+
+- ✅ Análisis ingenieril completo (833 líneas)
+- ✅ Código resumido para presentación (485 líneas)
+- ✅ Guía de entregables (282 líneas)
+- ✅ 18 figuras de alta calidad (DPI 300)
+- ✅ Manual de uso exhaustivo (500+ líneas)
 
 ## 👤 Autor
 
